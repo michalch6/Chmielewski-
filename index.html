@@ -19,9 +19,16 @@
 <link rel="canonical" href="https://michalch6.github.io/Chmielewski-/">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="preload" href="fonts/cormorant-garamond.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/albert-sans.woff" as="font" type="font/woff" crossorigin>
+<style>
+  /* Fonts hosted with the site (no requests to Google) */
+  @font-face{font-family:"Albert Sans";src:url("fonts/albert-sans.woff") format("woff");font-weight:400 700;font-style:normal;font-display:swap}
+  @font-face{font-family:"Cormorant Garamond";src:url("fonts/cormorant-garamond.woff") format("woff");font-weight:500 700;font-style:normal;font-display:swap}
+  @font-face{font-family:"Cormorant Garamond";src:url("fonts/cormorant-garamond-italic.woff") format("woff");font-weight:600;font-style:italic;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url("fonts/ibm-plex-mono-400.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url("fonts/ibm-plex-mono-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
+</style>
 <style>
   :root{
     --paper:#FBFBF8;
@@ -582,6 +589,33 @@
   html,body{margin:0}
   img{max-width:100%}
   [hidden]{display:none!important}
+
+  /* Polityka prywatności */
+  .foot-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px}
+  .foot-link{color:var(--stone);text-decoration:underline;text-underline-offset:3px}
+  .foot-link:hover{color:var(--ink)}
+  .bk-note{font-size:13px;color:var(--stone)}
+  .bk-note a{color:var(--hop);font-weight:600}
+  .pp{position:fixed;inset:0;margin:auto;width:min(760px,calc(100% - 32px));height:auto;max-height:min(90vh,880px);max-width:none;padding:0;border:0;border-radius:14px;background:var(--paper);color:var(--ink);box-shadow:0 40px 90px -30px rgba(12,15,10,.7);overflow:hidden}
+  .pp[open]{display:flex;flex-direction:column;animation:bkIn .28s cubic-bezier(.2,.7,.2,1)}
+  .pp::backdrop{background:rgba(12,15,10,.6);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+  .pp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px 26px 18px;border-bottom:1px solid var(--line)}
+  .pp-head h2{font-size:clamp(28px,3.4vw,38px);margin-top:8px}
+  .pp-date{margin-top:6px;color:var(--stone);font-size:14px}
+  .pp-body{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;padding:6px 26px 30px;font-size:16px;line-height:1.65}
+  .pp-body > *{max-width:62ch}
+  .pp-lead{margin-top:16px;font-size:17px}
+  .pp-body h3{font-family:var(--serif);font-size:23px;font-weight:600;margin-top:28px}
+  .pp-body p{margin-top:10px}
+  .pp-body ul{margin:10px 0 0;padding-left:20px;display:grid;gap:8px}
+  .pp-body li::marker{color:var(--hop)}
+  .pp-body a{color:var(--hop);font-weight:600}
+  @media (max-width:780px){
+    .pp{width:100%;height:100%;max-height:none;border-radius:0;margin:0}
+    .pp-head{padding:calc(14px + env(safe-area-inset-top,0px)) 16px 14px}
+    .pp-body{padding:2px 16px calc(28px + env(safe-area-inset-bottom,0px))}
+  }
+  @media (prefers-reduced-motion:reduce){.pp[open]{animation:none}}
 </style>
 </head>
 <body>
@@ -607,7 +641,7 @@
       <div>
         <p class="label">Lubawka · Jelenia Góra · Wałbrzych · Wrocław</p>
         <h1>Strony internetowe i zdjęcia dla firm z <em>Dolnego Śląska</em></h1>
-        <p class="lead">Robię stronę i sam fotografuję twoją firmę, więc wszystko do siebie pasuje od pierwszego dnia. Przyjeżdżam na miejsce, bez agencji i pośredników.</p>
+        <p class="lead">Robię stronę i sam fotografuję Twoją firmę, więc wszystko do siebie pasuje od pierwszego dnia. Przyjeżdżam na miejsce, bez agencji i pośredników.</p>
         <div class="ctas">
           <a class="btn" href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20Chmielewski%20Photography%20w%20sprawie%20wyceny." target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1.4-4.4a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M8.6 11.6h.01M12 11.6h.01M15.4 11.6h.01" stroke-width="2.6"/></svg>Napisz na WhatsApp</a>
           <a class="btn ghost" href="#kontakt" data-book><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Umów rozmowę</a>
@@ -656,14 +690,14 @@
   <section class="block" id="oferta">
     <div class="wrap">
       <div class="head">
-        <div><p class="label">Oferta</p><h2>Co mogę dla ciebie zrobić</h2></div>
-        <p>Klienci najpierw szukają cię w Google, a potem oglądają zdjęcia. Dbam o to, żeby w obu miejscach twoja firma wyglądała tak dobrze jak na żywo.</p>
+        <div><p class="label">Oferta</p><h2>Co mogę dla Ciebie zrobić</h2></div>
+        <p>Klienci najpierw szukają Cię w Google, a potem oglądają zdjęcia. Dbam o to, żeby w obu miejscach Twoja firma wyglądała tak dobrze jak na żywo.</p>
       </div>
 
       <div class="services">
         <div class="svc">
           <div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="6.5" cy="6.5" r=".6" fill="currentColor"/><circle cx="9" cy="6.5" r=".6" fill="currentColor"/></svg></div>
-          <div><h3>Strony internetowe</h3><p class="what">Szybka, czytelna strona, która dobrze wygląda na telefonie i mówi klientowi wszystko, czego potrzebuje, żeby do ciebie przyjść.</p></div>
+          <div><h3>Strony internetowe</h3><p class="what">Szybka, czytelna strona, która dobrze wygląda na telefonie i mówi klientowi wszystko, czego potrzebuje, żeby do Ciebie przyjść.</p></div>
           <ul>
             <li>Strona-wizytówka albo kilka podstron</li>
             <li>Oferta, cennik, godziny otwarcia, mapa dojazdu</li>
@@ -673,7 +707,7 @@
         </div>
         <div class="svc">
           <div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.6"/></svg></div>
-          <div><h3>Fotografia dla firm</h3><p class="what">Zdjęcia do strony, Bookingu, Map Google i social mediów. Robione u ciebie, w twoim świetle i z twoimi ludźmi.</p></div>
+          <div><h3>Fotografia dla firm</h3><p class="what">Zdjęcia do strony, Bookingu, Map Google i social mediów. Robione u Ciebie, w Twoim świetle i z Twoimi ludźmi.</p></div>
           <ul>
             <li>Wnętrza: pokoje, sale, lokale, warsztaty</li>
             <li>Ludzie przy pracy i portrety zespołu</li>
@@ -683,7 +717,7 @@
         </div>
         <div class="svc">
           <div class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.2"/><path d="M10.5 9.5v5l4-2.5z" fill="currentColor"/></svg></div>
-          <div><h3>Rolki i social media</h3><p class="what">Krótkie filmy na Instagram, Facebook i TikTok, które pokazują, jak u ciebie jest. Nagrywam, montuję i oddaję gotowe do wrzucenia.</p></div>
+          <div><h3>Rolki i social media</h3><p class="what">Krótkie filmy na Instagram, Facebook i TikTok, które pokazują, jak u Ciebie jest. Nagrywam, montuję i oddaję gotowe do wrzucenia.</p></div>
           <ul>
             <li>Rolki pionowe do 60 sekund</li>
             <li>Napisy i muzyka dopasowane do platformy</li>
@@ -762,7 +796,7 @@
         </summary>
         <div class="al-body">
           <div class="case-head">
-            <p class="desc">Festiwal światła, muzyki i mappingów w Cieplicach Śląskich-Zdroju w Jeleniej Górze. Fotografowałem koncerty na głównej scenie: noc, dym, światło zmieniające się co sekundę i tłum pod sceną. Jeśli daję radę w takich warunkach, poradzę sobie też wieczorem w twoim lokalu.</p>
+            <p class="desc">Festiwal światła, muzyki i mappingów w Cieplicach Śląskich-Zdroju w Jeleniej Górze. Fotografowałem koncerty na głównej scenie: noc, dym, światło zmieniające się co sekundę i tłum pod sceną. Jeśli daję radę w takich warunkach, poradzę sobie też wieczorem w Twoim lokalu.</p>
             <dl class="facts">
             <dt>Miejsce</dt><dd>Cieplice Śląskie-Zdrój, Jelenia Góra</dd>
             <dt>Termin</dt><dd>18–20 września 2026</dd>
@@ -896,7 +930,7 @@
         </summary>
         <div class="al-body">
           <div class="case-head">
-            <p class="desc">Dudziarz na Royal Mile, zamek na skale i pomnik niedźwiedzia Wojtka, żołnierza Armii Andersa. Zdjęcie dudziarza pokazuje, jak fotografuję ludzi przy pracy: naturalnie i w ich własnym otoczeniu. Tak samo zrobię zdjęcia twojemu zespołowi.</p>
+            <p class="desc">Dudziarz na Royal Mile, zamek na skale i pomnik niedźwiedzia Wojtka, żołnierza Armii Andersa. Zdjęcie dudziarza pokazuje, jak fotografuję ludzi przy pracy: naturalnie i w ich własnym otoczeniu. Tak samo zrobię zdjęcia Twojemu zespołowi.</p>
             <dl class="facts">
             <dt>Miejsce</dt><dd>Edynburg, Szkocja</dd>
             <dt>Zakres</dt><dd>Ludzie, architektura, pomniki</dd>
@@ -916,7 +950,7 @@
       <div class="cta-band">
         <div>
           <p class="label">Twoja firma</p>
-          <h3>Tu może być twój pensjonat albo lokal</h3>
+          <h3>Tu może być Twój pensjonat albo lokal</h3>
           <p>Szukam pierwszych firm z okolicy, dla których zrobię stronę i zdjęcia w obniżonej cenie w zamian za opinię.</p>
         </div>
         <a class="btn" href="#kontakt">Zgłoś firmę</a>
@@ -931,9 +965,9 @@
         <p>Nie musisz znać się na stronach ani na zdjęciach. Wystarczy, że znasz swoją firmę.</p>
       </div>
       <div class="steps">
-        <div class="step"><p class="n">Krok 1</p><h3>Rozmowa</h3><p>Przyjeżdżam do firmy albo dzwonię. Pytam, kim są twoi klienci i czego szukają.</p></div>
+        <div class="step"><p class="n">Krok 1</p><h3>Rozmowa</h3><p>Przyjeżdżam do firmy albo dzwonię. Pytam, kim są Twoi klienci i czego szukają.</p></div>
         <div class="step"><p class="n">Krok 2</p><h3>Zdjęcia</h3><p>Robię sesję na miejscu: wnętrze, ludzie, produkty. Ty wybierasz ulubione ujęcia.</p></div>
-        <div class="step"><p class="n">Krok 3</p><h3>Strona</h3><p>Pokazuję gotowy projekt, wprowadzam poprawki i publikuję stronę pod twoim adresem.</p></div>
+        <div class="step"><p class="n">Krok 3</p><h3>Strona</h3><p>Pokazuję gotowy projekt, wprowadzam poprawki i publikuję stronę pod Twoim adresem.</p></div>
         <div class="step"><p class="n">Krok 4</p><h3>Dalej</h3><p>Uzupełniam Mapy Google, nagrywam rolki i zmieniam stronę, kiedy tego potrzebujesz.</p></div>
       </div>
     </div>
@@ -969,7 +1003,7 @@
     <div class="wrap">
       <div>
         <p class="label">Kontakt</p>
-        <h2>Porozmawiajmy o twojej firmie</h2>
+        <h2>Porozmawiajmy o Twojej firmie</h2>
         <p class="lead">Zadzwoń, napisz na WhatsAppie albo mailem, czym się zajmujesz i gdzie jesteś. Odpisuję zwykle w ciągu jednego dnia i umawiamy krótkie spotkanie. Wycena jest bezpłatna.</p>
         <div class="c-ctas">
           <a class="btn wa-btn" href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20Chmielewski%20Photography%20w%20sprawie%20wyceny." target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1.4-4.4a8.5 8.5 0 1 1 15.6-4.6z"/><path d="M8.6 11.6h.01M12 11.6h.01M15.4 11.6h.01" stroke-width="2.6"/></svg>Napisz na WhatsApp</a>
@@ -992,7 +1026,7 @@
 <footer>
   <div class="wrap">
     <a class="brand" href="#start"><img src="mark.png" alt="" width="32" height="31"><span class="brand-name">Chmielewski</span></a>
-    <span>© 2026 Michał Chmielewski · Lubawka</span>
+    <div class="foot-meta"><span>© 2026 Michał Chmielewski · Lubawka</span><a class="foot-link" href="#polityka-prywatnosci" data-pp>Polityka prywatności</a></div>
   </div>
 </footer>
 
@@ -1044,10 +1078,11 @@
         <div class="pk-list" id="bk-packs" role="group" aria-label="Pakiety"></div>
       </section>
       <section class="bk-step" aria-labelledby="bk-s5">
-        <h3 id="bk-s5"><span>5</span>Kilka słów o tobie<em>opcjonalnie</em></h3>
+        <h3 id="bk-s5"><span>5</span>Kilka słów o Tobie<em>opcjonalnie</em></h3>
         <div class="chips" id="bk-topics" aria-label="Czego dotyczy rozmowa"></div>
         <div class="fld"><label for="bk-name">Imię</label><input id="bk-name" type="text" autocomplete="given-name" placeholder="np. Anna"></div>
         <div class="fld"><label for="bk-firm" id="bk-firm-l">Firma i miejscowość</label><input id="bk-firm" type="text" autocomplete="organization" placeholder="np. Pensjonat Pod Lipami, Chełmsko Śląskie"></div>
+        <p class="bk-note">Dane trafią do mnie dopiero wtedy, gdy wyślesz wiadomość. <a href="#polityka-prywatnosci" data-pp>Polityka prywatności</a></p>
       </section>
       <section class="bk-step" aria-labelledby="bk-s6">
         <h3 id="bk-s6">Twoja wiadomość</h3>
@@ -1084,6 +1119,87 @@
   </div>
 </dialog>
 
+<dialog class="pp" id="pp" aria-labelledby="pp-title">
+  <div class="pp-head">
+    <div>
+      <p class="label">Chmielewski Photography</p>
+      <h2 id="pp-title">Polityka prywatności</h2>
+      <p class="pp-date">Obowiązuje od 28 września 2026 r.</p>
+    </div>
+    <button type="button" class="bk-x" id="pp-close" aria-label="Zamknij"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="pp-body">
+    <p class="pp-lead">Szanuję Twoją prywatność. Poniżej wyjaśniam, jakie dane do mnie trafiają, gdy korzystasz z tej strony i kontaktujesz się ze mną, oraz jakie masz prawa.</p>
+
+    <h3>1. Kto jest administratorem danych</h3>
+    <p>Administratorem Twoich danych osobowych jest Michał Chmielewski z Lubawki. We wszystkich sprawach dotyczących danych możesz napisać na <a href="mailto:kriko700@o2.pl">kriko700@o2.pl</a> albo zadzwonić pod numer <a href="tel:+48736842214">+48 736 842 214</a>.</p>
+
+    <h3>2. Jakie dane zbieram i skąd</h3>
+    <p>Strona nie ma formularza, który wysyłałby dane na serwer. Twoje dane dostaję tylko wtedy, gdy sam się ze mną skontaktujesz: przez WhatsApp, telefon, e-mail albo Instagram. Zwykle są to imię, nazwa firmy i miejscowość, numer telefonu lub adres e-mail oraz treść wiadomości.</p>
+    <p>Narzędzie „Umów rozmowę” działa wyłącznie w Twojej przeglądarce. Przygotowuje treść wiadomości, którą sam wysyłasz przez WhatsApp. Dopóki jej nie wyślesz, nic do mnie nie trafia.</p>
+
+    <h3>3. W jakim celu i na jakiej podstawie</h3>
+    <ul>
+      <li>Odpowiedź na Twoją wiadomość, umówienie rozmowy i przygotowanie oferty. Podstawa: art. 6 ust. 1 lit. b RODO, czyli działania podejmowane na Twoje żądanie przed zawarciem umowy.</li>
+      <li>Wykonanie umowy, jeśli zdecydujesz się na współpracę. Podstawa: art. 6 ust. 1 lit. b RODO.</li>
+      <li>Prowadzenie korespondencji oraz ewentualne dochodzenie roszczeń lub obrona przed nimi. Podstawa: art. 6 ust. 1 lit. f RODO, czyli mój prawnie uzasadniony interes.</li>
+      <li>Wypełnienie obowiązków wynikających z przepisów, np. podatkowych. Podstawa: art. 6 ust. 1 lit. c RODO.</li>
+    </ul>
+
+    <h3>4. Jak długo przechowuję dane</h3>
+    <p>Dane z korespondencji przechowuję przez czas potrzebny do odpowiedzi i przygotowania oferty. Jeśli nie dojdzie do współpracy, usuwam je najpóźniej 12 miesięcy od ostatniego kontaktu. Jeśli zawrzemy umowę, przechowuję je przez czas jej wykonywania, a potem tak długo, jak wymagają tego przepisy (np. podatkowe), albo do przedawnienia ewentualnych roszczeń.</p>
+
+    <h3>5. Komu przekazuję dane</h3>
+    <p>Nie sprzedaję Twoich danych i nie przekazuję ich innym firmom w celach marketingowych. Dane mogą jednak trafić do dostawców usług, z których korzystam:</p>
+    <ul>
+      <li><b>GitHub, Inc.</b> utrzymuje tę stronę na swoich serwerach. Przy każdym wejściu na stronę GitHub zapisuje adres IP odwiedzającego ze względów bezpieczeństwa.</li>
+      <li><b>WhatsApp i Instagram (Meta)</b>, gdy piszesz do mnie przez te aplikacje.</li>
+      <li><b>Dostawca poczty o2.pl</b>, gdy piszesz do mnie e-mail.</li>
+      <li><b>Operator telekomunikacyjny</b>, gdy dzwonisz albo wysyłasz SMS.</li>
+    </ul>
+    <p>Każdy z tych dostawców przetwarza dane także na własnych zasadach, opisanych w jego polityce prywatności.</p>
+
+    <h3>6. Przekazywanie danych poza Europejski Obszar Gospodarczy</h3>
+    <p>GitHub i Meta mogą przetwarzać dane na serwerach w USA. GitHub przystąpił do programu EU-U.S. Data Privacy Framework, który zapewnia odpowiedni poziom ochrony danych przekazywanych z Unii Europejskiej do USA. Meta opisuje swoje zabezpieczenia w politykach prywatności WhatsAppa i Instagrama.</p>
+
+    <h3>7. Pliki cookies i statystyki</h3>
+    <p>Strona nie używa plików cookies ani narzędzi do statystyk i nie śledzi Twojej aktywności. Zdjęcia, czcionki i skrypty wczytują się z tego samego serwera co strona. Z WhatsAppem, Instagramem, pocztą albo telefonem łączysz się dopiero wtedy, gdy sam klikniesz odpowiedni przycisk.</p>
+
+    <h3>8. Twoje prawa</h3>
+    <p>Masz prawo do dostępu do swoich danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania, do przenoszenia danych oraz do wniesienia sprzeciwu wobec przetwarzania opartego na moim prawnie uzasadnionym interesie. Żeby skorzystać z tych praw, napisz na <a href="mailto:kriko700@o2.pl">kriko700@o2.pl</a>. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa).</p>
+
+    <h3>9. Czy musisz podawać dane</h3>
+    <p>Podanie danych jest dobrowolne, ale bez nich nie odpowiem na Twoją wiadomość i nie przygotuję oferty. Nie podejmuję wobec Ciebie decyzji w sposób zautomatyzowany i nie profiluję Twoich danych.</p>
+
+    <h3>10. Zmiany polityki</h3>
+    <p>Jeśli strona się zmieni, np. pojawią się statystyki odwiedzin, zaktualizuję tę politykę i datę na górze.</p>
+  </div>
+</dialog>
+
+<script>
+  /* ===== Polityka prywatności (okno + link #polityka-prywatnosci) ===== */
+  (function(){
+    var pp=document.getElementById('pp');
+    if(!pp||typeof pp.showModal!=='function')return;
+    var H='#polityka-prywatnosci',opener=null;
+    function setHash(h){try{history.replaceState(null,'',h||location.pathname+location.search)}catch(e){}}
+    function open(el){
+      if(pp.open)return;opener=el||null;pp.showModal();
+      document.documentElement.style.overflow='hidden';pp.querySelector('.pp-body').scrollTop=0;
+      if(location.hash!==H)setHash(H);
+    }
+    pp.addEventListener('close',function(){
+      if(!document.querySelector('dialog[open]'))document.documentElement.style.overflow='';
+      if(location.hash===H)setHash('');
+      if(opener)opener.focus({preventScroll:true});
+    });
+    document.getElementById('pp-close').addEventListener('click',function(){pp.close()});
+    pp.addEventListener('click',function(e){if(e.target===pp)pp.close()});
+    [].forEach.call(document.querySelectorAll('[data-pp]'),function(a){a.addEventListener('click',function(e){e.preventDefault();open(a)})});
+    window.addEventListener('hashchange',function(){if(location.hash===H)open(null)});
+    if(location.hash===H)open(null);
+  })();
+</script>
 <script>
   /* ===== Umów rozmowę: kalendarz + suwak godziny -> gotowa wiadomość na WhatsApp ===== */
   (function(){
