@@ -601,6 +601,22 @@
   .vn svg{position:absolute;left:0;bottom:0;overflow:visible;transform-origin:0 100%;transform:scale(1,var(--fy,1)) rotate(calc(var(--b,0deg) + var(--sway) * var(--k,1)))}
   @media (prefers-reduced-motion:reduce){.hop-swing{transition:opacity .2s}.vn{transition:none;rotate:0deg}}
 
+  /* Film w wizjerze */
+  .vf video.shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#060806}
+  .vf .rec{display:inline-flex;align-items:center;gap:8px}
+  .vf .rec i{width:9px;height:9px;border-radius:50%;background:#ff4d4d;box-shadow:0 0 8px rgba(255,77,77,.8);animation:recblink 1.2s steps(2,start) infinite}
+  @keyframes recblink{to{visibility:hidden}}
+  .vf .exif{padding-right:176px}
+  .vf .exif .tc{color:#F3F6EC;font-variant-numeric:tabular-nums}
+  .snd{position:absolute;right:10px;bottom:8px;z-index:3;display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 13px;border-radius:999px;border:1px solid rgba(243,246,236,.4);background:rgba(18,24,14,.6);color:#F3F6EC;font:500 12.5px/1 var(--mono);letter-spacing:.03em;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+  .snd:hover{border-color:#B9DC7A;color:#B9DC7A}
+  .snd:focus-visible{outline:2px solid #B9DC7A;outline-offset:2px}
+  .snd .ic-on,.snd[aria-pressed="true"] .ic-off{display:none}
+  .snd[aria-pressed="true"] .ic-on{display:block}
+  .snd[aria-pressed="true"]{background:#B9DC7A;border-color:#B9DC7A;color:#26321A}
+  @media (max-width:520px){.snd .snd-t{display:none}.snd{padding:0 9px}.vf .exif{padding-right:56px}}
+  @media (prefers-reduced-motion:reduce){.vf .rec i{animation:none}}
+
   /* Polityka prywatności */
   .foot-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px}
   .foot-link{color:var(--stone);text-decoration:underline;text-underline-offset:3px}
@@ -662,13 +678,12 @@
       </div>
 
       <div class="vf">
-        <img class="shot" src="hero-festiwal.jpg" alt="Kolorowe snopy świateł nad sceną i tłum pod sceną" width="900" height="1125" fetchpriority="high">
-        <button type="button" class="zoom zoom-hit" data-full="hd-festiwal-tecza.jpg" data-cap="Festiwal Światła Wonderland – Asia" aria-label="Powiększ zdjęcie: kolorowe snopy świateł nad sceną"></button>
+        <video class="shot" id="reel" poster="showreel-poster.jpg" width="864" height="1080" autoplay muted loop playsinline preload="auto" aria-label="Krótki film: zdjęcie z aparatu przechodzi przez matrycę i kabel do komputera, powstaje z niego strona internetowa, potem rolki na telefonie i logo Chmielewski"><source src="showreel.mp4" type="video/mp4"><source src="showreel.webm" type="video/webm"></video>
+        <button type="button" class="snd" id="snd" aria-pressed="false"><svg class="ic-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg><svg class="ic-on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg><span class="snd-t">Włącz dźwięk</span></button>
         <div class="hud" aria-hidden="true">
           <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
-          <div class="top-hud mono"><span class="af"><i></i>AF-S</span><span>6K</span></div>
-          <span class="focus"></span>
-          <div class="exif"><span class="cap"><b>Wonderland – Asia 2026</b></span><span class="hide-sm">Jelenia Góra</span></div>
+          <div class="top-hud mono"><span class="rec"><i></i>REC</span><span>6K</span></div>
+          <div class="exif"><span class="cap"><b>Showreel 2026</b></span><span class="tc" id="tc">00:00:00:00</span></div>
         </div>
         <span class="blade b1" aria-hidden="true"></span><span class="blade b2" aria-hidden="true"></span>
       </div>
@@ -1176,7 +1191,7 @@
     <p>GitHub i Meta mogą przetwarzać dane na serwerach w USA. GitHub przystąpił do programu EU-U.S. Data Privacy Framework, który zapewnia odpowiedni poziom ochrony danych przekazywanych z Unii Europejskiej do USA. Meta opisuje swoje zabezpieczenia w politykach prywatności WhatsAppa i Instagrama.</p>
 
     <h3>7. Pliki cookies i statystyki</h3>
-    <p>Strona nie używa plików cookies ani narzędzi do statystyk i nie śledzi Twojej aktywności. Zdjęcia, czcionki i skrypty wczytują się z tego samego serwera co strona. Z WhatsAppem, Instagramem, pocztą albo telefonem łączysz się dopiero wtedy, gdy sam klikniesz odpowiedni przycisk.</p>
+    <p>Strona nie używa plików cookies ani narzędzi do statystyk i nie śledzi Twojej aktywności. Zdjęcia, filmy, czcionki i skrypty wczytują się z tego samego serwera co strona. Z WhatsAppem, Instagramem, pocztą albo telefonem łączysz się dopiero wtedy, gdy sam klikniesz odpowiedni przycisk.</p>
 
     <h3>8. Twoje prawa</h3>
     <p>Masz prawo do dostępu do swoich danych, ich sprostowania, usunięcia lub ograniczenia przetwarzania, do przenoszenia danych oraz do wniesienia sprzeciwu wobec przetwarzania opartego na moim prawnie uzasadnionym interesie. Żeby skorzystać z tych praw, napisz na <a href="mailto:kriko700@o2.pl">kriko700@o2.pl</a>. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa).</p>
@@ -1244,6 +1259,27 @@
     window.addEventListener('scroll',onScroll,{passive:true});
     window.addEventListener('resize',function(){buildVine();place()});
     buildVine();place();
+  })();
+
+  /* ===== Film w wizjerze: kod czasowy i dźwięk ===== */
+  (function(){
+    var v=document.getElementById('reel'),btn=document.getElementById('snd'),tc=document.getElementById('tc');
+    if(!v||!btn)return;
+    var label=btn.querySelector('.snd-t');
+    var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function two(n){return (n<10?'0':'')+n}
+    function tick(){var t=v.currentTime||0,s=Math.floor(t);if(tc)tc.textContent='00:00:'+two(s)+':'+two(Math.floor((t-s)*30));requestAnimationFrame(tick)}
+    requestAnimationFrame(tick);
+    if(still){v.removeAttribute('autoplay');v.pause();label.textContent='Odtwórz z dźwiękiem'}
+    function sync(){var on=!v.muted&&!v.paused;btn.setAttribute('aria-pressed',on?'true':'false');btn.setAttribute('aria-label',on?'Wycisz film':'Włącz dźwięk filmu');label.textContent=on?'Wycisz':(still&&v.paused?'Odtwórz z dźwiękiem':'Włącz dźwięk')}
+    btn.addEventListener('click',function(){
+      if(v.muted||v.paused){v.muted=false;v.volume=.9;var p=v.play();if(p&&p.catch)p.catch(function(){v.muted=true;sync()})}
+      else{v.muted=true}
+      sync();
+    });
+    v.addEventListener('volumechange',sync);v.addEventListener('play',sync);v.addEventListener('pause',sync);
+    if(!still){var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){})}
+    sync();
   })();
 
   /* ===== Polityka prywatności (okno + link #polityka-prywatnosci) ===== */
