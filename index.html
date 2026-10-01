@@ -343,8 +343,6 @@
 
   /* About */
   .about{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
-  .about .logo-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:40px 32px;display:grid;place-items:center}
-  .about .logo-card img{width:100%;max-width:420px;height:auto;display:block}
   .about h2{font-size:clamp(34px,4.6vw,50px);margin-top:12px}
   .about .txt{display:grid;gap:16px;margin-top:20px;color:var(--ink);max-width:34em}
   .about .txt p:not(:first-child){color:var(--stone)}
@@ -447,8 +445,6 @@
   @media (hover:hover) and (pointer:fine){.album summary:hover .al-thumbs img:nth-child(4){rotate:5deg;translate:3px -2px}}
   .brand img{transition:rotate .6s cubic-bezier(.3,1.6,.5,1)}
   @media (hover:hover) and (pointer:fine){.brand:hover img{rotate:-14deg}}
-  .logo-card img{transition:scale .45s var(--ease-out)}
-  @media (hover:hover) and (pointer:fine){.logo-card:hover img{scale:1.03}}
 
   /* Floating WhatsApp button */
   .wa-fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20;display:inline-flex;align-items:center;gap:9px;padding:13px 18px 13px 15px;border-radius:999px;background:var(--hop);color:#fff;text-decoration:none;font:600 15px/1 var(--sans);box-shadow:0 14px 30px -12px rgba(38,50,26,.7);transition:background .2s,translate .4s var(--ease-out);animation:fabIn .6s var(--ease-out) 1.8s both}
@@ -707,10 +703,10 @@
   /* ===== Tryb ciemny ===== */
   ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
   .theme-anim body,.theme-anim .top,.theme-anim .mistbg,.theme-anim .pack,.theme-anim .contact,.theme-anim footer{transition:background-color .6s,color .6s}
-  .brand img.mk-d,.logo-card img.lg-d{display:none}
+  .brand img.mk-d{display:none}
   :root[data-theme="dark"]{color-scheme:dark;--paper:#0E120D;--mist:#151C13;--ink:#EDF1E6;--stone:#A6AF9C;--hop:#A9C76E;--hop-bright:#B9DC7A;--hop-deep:#1A2314;--line:#2A3426;--on-deep:#EEF1E7;--on-deep-muted:#AEB8A0}
-  [data-theme="dark"] .brand img.mk-l,[data-theme="dark"] .logo-card img.lg-l{display:none}
-  [data-theme="dark"] .brand img.mk-d,[data-theme="dark"] .logo-card img.lg-d{display:block}
+  [data-theme="dark"] .brand img.mk-l{display:none}
+  [data-theme="dark"] .brand img.mk-d{display:block}
   [data-theme="dark"] .top{background:rgba(14,18,13,.86)}
   [data-theme="dark"] .btn{background:#5A7234;border-color:#5A7234;color:#fff}
   @media (hover:hover) and (pointer:fine){[data-theme="dark"] .btn:hover{background:#6E8A3E;border-color:#6E8A3E;color:#fff}}
@@ -726,7 +722,7 @@
   @media (hover:hover) and (pointer:fine){[data-theme="dark"] .wa-fab:hover{background:#6E8A3E}}
   [data-theme="dark"] .contact{background:#141C10}
   [data-theme="dark"] .cta-band{background:#1A2314;box-shadow:inset 0 0 0 1px #2A3426}
-  [data-theme="dark"] .about .logo-card,[data-theme="dark"] .kit span{background:#141A12}
+  [data-theme="dark"] .kit span{background:#141A12}
   @media (hover:hover) and (pointer:fine){[data-theme="dark"] .pack:hover{box-shadow:0 20px 40px -26px rgba(0,0,0,.95)}}
   [data-theme="dark"] .vf{box-shadow:0 30px 60px -30px rgba(0,0,0,.95)}
   [data-theme="dark"] .cal,[data-theme="dark"] .tpick,[data-theme="dark"] .pk,[data-theme="dark"] .chip,[data-theme="dark"] .fld input,[data-theme="dark"] .bubble,[data-theme="dark"] .bk-foot,[data-theme="dark"] .bk-copy{background:#141A12}
@@ -759,9 +755,81 @@
     .btn:active,.wa-fab:active,.copy:active,.chip:active,.pk:active,.tp-btn:active:not(:disabled),.lb-btn:active,.bk-x:active,.bk-copy:active,.cal-nav button:active:not(:disabled),.snd:active,.album summary:active .al-toggle,.theme-tg:active{scale:.97}
     .cal-day:active:not(:disabled){scale:.94}
   }
+
+  /* ===== Redesign (redesign-existing-projects): photo-first, film grain, editorial labels ===== */
+  :root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .14 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .075 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");--grain-lt:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .93 0 0 0 0 .95 0 0 0 0 .9 0 0 0 .075 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}
+  /* Film grain + soft light on the tinted bands; plain paper stays clean */
+  .mistbg{background-color:var(--mist);background-image:var(--grain),radial-gradient(70% 60% at 92% 0%,rgba(126,154,75,.12),rgba(126,154,75,0) 70%)}
+  .contact{background-color:var(--hop-deep);background-image:var(--grain-lt),radial-gradient(60% 80% at 0% 0%,rgba(185,220,122,.11),rgba(185,220,122,0) 70%)}
+  .cta-band{background-color:var(--hop-deep);background-image:var(--grain-lt),radial-gradient(50% 120% at 100% 0%,rgba(185,220,122,.12),rgba(185,220,122,0) 70%)}
+  [data-theme="dark"] .mistbg{background-image:var(--grain-lt),radial-gradient(70% 60% at 92% 0%,rgba(169,199,110,.07),rgba(169,199,110,0) 70%)}
+  [data-theme="dark"] .contact{background-color:#141C10;background-image:var(--grain-lt),radial-gradient(60% 80% at 0% 0%,rgba(185,220,122,.08),rgba(185,220,122,0) 70%)}
+  [data-theme="dark"] .cta-band{background-color:#1A2314;background-image:var(--grain-lt)}
+
+  /* Labels: camera-style mono in sentence case, sections numbered 01-06 */
+  .label{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.01em;text-transform:none}
+  .label .idx{color:var(--stone);font-weight:400}
+  .label .idx::after{content:"";display:inline-block;width:22px;height:1px;margin-inline:10px;background:currentColor;vertical-align:.3em;opacity:.55}
+  .contact .label .idx{color:var(--on-deep-muted)}
+
+  /* Headlines with more presence */
+  .hero h1{font-size:clamp(44px,6.1vw,76px);line-height:1;letter-spacing:-.02em}
+  .head h2,.about h2,.contact h2{letter-spacing:-.015em;line-height:1.02}
+  p,li{text-wrap:pretty}
+
+  /* Recommended package stands out by colour, not just a border */
+  .pack .tag{border-radius:4px}
+  .pack.pick{background:var(--grain-lt),var(--hop-deep);color:var(--on-deep);border:1px solid var(--hop-deep);box-shadow:0 34px 60px -34px rgba(38,50,26,.6)}
+  .pack.pick h3,.pack.pick .price strong{color:#fff}
+  .pack.pick .for,.pack.pick .price{color:var(--on-deep-muted)}
+  .pack.pick ul,.pack.pick .price{border-top-color:rgba(238,241,231,.16)}
+  .pack.pick li svg{color:#B9DC7A}
+  .pack.pick .tag{background:#B9DC7A;color:#1A2314}
+  .pack.pick .btn.ghost{background:#B9DC7A;border-color:#B9DC7A;color:#1A2314}
+  @media (hover:hover) and (pointer:fine){.pack.pick .btn.ghost:hover{background:#fff;border-color:#fff;color:#1A2314}.pack.pick:hover{box-shadow:0 34px 60px -28px rgba(38,50,26,.7)}}
+  [data-theme="dark"] .pack.pick{background:var(--grain-lt),#1E2A17;border-color:rgba(185,220,122,.35)}
+  [data-theme="dark"] .pack.pick .tag{background:#B9DC7A;color:#1A2314}
+
+  /* "O mnie": real photo in a viewfinder frame, hop badge overlapping the edge */
+  .me{position:relative;margin:0;width:100%;max-width:460px}
+  .me-frame{position:relative;aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:#11150e;box-shadow:0 30px 60px -34px rgba(38,50,26,.55)}
+  .me-frame img{display:block;width:100%;height:100%;object-fit:cover;transition:scale .6s var(--ease-out)}
+  @media (hover:hover) and (pointer:fine){.me:hover .me-frame img{scale:1.03}}
+  .me-frame .corner{position:absolute;width:22px;height:22px;border:2px solid rgba(243,246,236,.8);pointer-events:none}
+  .me-frame .c1{top:14px;left:14px;border-right:0;border-bottom:0}
+  .me-frame .c2{top:14px;right:14px;border-left:0;border-bottom:0}
+  .me-frame .c3{bottom:14px;left:14px;border-right:0;border-top:0}
+  .me-frame .c4{bottom:14px;right:14px;border-left:0;border-top:0}
+  .me-badge{position:absolute;right:-16px;bottom:58px;width:84px;height:84px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 16px 30px -18px rgba(38,50,26,.55)}
+  .me-badge img{width:48px;height:auto;display:block}
+  .me .mk-d{display:none}
+  [data-theme="dark"] .me .mk-l{display:none}
+  [data-theme="dark"] .me .mk-d{display:block}
+  [data-theme="dark"] .me-frame{box-shadow:0 30px 60px -30px rgba(0,0,0,.95)}
+  [data-theme="dark"] .me-badge{box-shadow:0 16px 30px -16px rgba(0,0,0,.9)}
+  .me figcaption{margin-top:12px;color:var(--stone)}
+  @media (max-width:860px){.me{max-width:380px}}
+  .kit span{border-radius:6px}
+  @supports (animation-timeline: view()){
+    @media (prefers-reduced-motion:no-preference){
+      .me-frame{animation:aperture linear both;animation-timeline:view();animation-range:entry 5% entry 70%}
+      @keyframes aperture{from{clip-path:inset(12% 12% 12% 12% round 10px)}to{clip-path:inset(0 0 0 0 round 10px)}}
+    }
+  }
+
+  /* Menu shows where you are */
+  .nav a:not(.btn){position:relative;transition:color .2s}
+  .nav a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1.5px;border-radius:1px;background:var(--hop);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-out)}
+  .nav a.is-active{color:var(--ink)}
+  .nav a.is-active::after{transform:scaleX(1)}
+
+  /* Skip link (keyboard) */
+  .skip{position:fixed;left:12px;top:10px;z-index:60;padding:11px 16px;border-radius:8px;background:var(--hop-deep);color:#fff;font:600 14px/1 var(--sans);text-decoration:none;opacity:0;pointer-events:none;transform:translateY(-160%);transition:transform .2s var(--ease-out),opacity .2s}
+  .skip:focus-visible{opacity:1;pointer-events:auto;transform:none;outline:2px solid #B9DC7A;outline-offset:2px}
 </style>
 </head>
 <body>
+<a class="skip" href="#start">Przejdź do treści</a>
 <header class="top">
   <span class="vine" aria-hidden="true"></span>
   <span class="hop-rider" aria-hidden="true"><span class="hop-swing"><svg viewBox="0 0 24 32" width="18" height="24" focusable="false"><path d="M12,0 C12.4,2.2 11.6,4.2 12,6.6" fill="none" stroke="#3F5424" stroke-width="1.3" stroke-linecap="round"/><path d="M12.3,3.4 C13.6,0.6 17.6,-0.2 20.6,0.9 C19.7,4 15.9,5.6 12.3,3.4Z" fill="#5A7234"/><path d="M12.6,3.2 C15,2.2 17.4,1.4 19.8,1.1" fill="none" stroke="#B9DC7A" stroke-width=".6" stroke-linecap="round" opacity=".8"/><g stroke="#3F5424" stroke-width=".75" stroke-linejoin="round"><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(12 22.6) scale(0.72)" fill="#6B8540"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(9.4 20.2) scale(0.8)" fill="#7E9A4B"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(14.6 20.2) scale(0.8)" fill="#7E9A4B"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(12 17.4) scale(1)" fill="#6B8540"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(8 14.6) scale(0.95)" fill="#8FAA5A"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(16 14.6) scale(0.95)" fill="#8FAA5A"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(12 11.6) scale(1)" fill="#7E9A4B"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(8.3 8.9) scale(0.9)" fill="#9BB566"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(15.7 8.9) scale(0.9)" fill="#9BB566"/><path d="M0,0 C3.9,0.7 4.4,4.9 0,8.6 C-4.4,4.9 -3.9,0.7 0,0Z" transform="translate(12 6) scale(0.9)" fill="#8FAA5A"/></g></svg></span></span>
@@ -835,7 +903,7 @@
   <section class="block" id="oferta">
     <div class="wrap">
       <div class="head">
-        <div><p class="label">Oferta</p><h2>Co mogę dla Ciebie zrobić</h2></div>
+        <div><p class="label"><span class="idx">01</span>Oferta</p><h2>Co mogę dla Ciebie zrobić</h2></div>
         <p>Klienci najpierw szukają Cię w Google, a potem oglądają zdjęcia. Dbam o to, żeby w obu miejscach Twoja firma wyglądała tak dobrze jak na żywo.</p>
       </div>
 
@@ -877,7 +945,7 @@
   <section class="block mistbg" id="pakiety">
     <div class="wrap">
       <div class="head">
-        <div><p class="label">Pakiety</p><h2>Wybierz, od czego zaczynamy</h2></div>
+        <div><p class="label"><span class="idx">02</span>Pakiety</p><h2>Wybierz, od czego zaczynamy</h2></div>
         <p>Każdy pakiet dopasowuję do firmy. Cenę podaję po krótkiej, bezpłatnej rozmowie, zanim cokolwiek zaczniemy.</p>
       </div>
       <div class="packs">
@@ -925,7 +993,7 @@
   <section class="block" id="realizacje">
     <div class="wrap">
       <div class="head">
-        <div><p class="label">Realizacje</p><h2>Wybrane zdjęcia</h2></div>
+        <div><p class="label"><span class="idx">03</span>Realizacje</p><h2>Wybrane zdjęcia</h2></div>
         <p>Wydarzenia, przyroda i miejsca, które fotografowałem w Polsce i za granicą. Każde z nich to umiejętność, która przydaje się przy zdjęciach dla firm. Kliknij album, żeby go rozwinąć, a zdjęcie, żeby je powiększyć.</p>
       </div>
       <div class="albums">
@@ -1106,7 +1174,7 @@
   <section class="block mistbg" id="jak-pracuje">
     <div class="wrap">
       <div class="head">
-        <div><p class="label">Jak pracuję</p><h2>Od rozmowy do gotowej strony</h2></div>
+        <div><p class="label"><span class="idx">04</span>Jak pracuję</p><h2>Od rozmowy do gotowej strony</h2></div>
         <p>Nie musisz znać się na stronach ani na zdjęciach. Wystarczy, że znasz swoją firmę.</p>
       </div>
       <div class="steps">
@@ -1121,9 +1189,9 @@
   <section class="block" id="o-mnie">
     <div class="wrap">
       <div class="about">
-        <div class="logo-card"><img class="lg-l" src="logo.png" alt="Logo Chmielewski Photography: aparat z szyszką chmielu" width="720" height="475"><img class="lg-d" src="logo-light.png" alt="Logo Chmielewski Photography: aparat z szyszką chmielu" width="720" height="475"></div>
+        <figure class="me"><div class="me-frame"><img src="michal.jpg" alt="Michał Chmielewski z aparatem Lumix przy oku" width="960" height="1200" loading="lazy" decoding="async"><span class="corner c1" aria-hidden="true"></span><span class="corner c2" aria-hidden="true"></span><span class="corner c3" aria-hidden="true"></span><span class="corner c4" aria-hidden="true"></span></div><span class="me-badge" aria-hidden="true"><img class="mk-l" src="mark.png" alt="" width="48" height="47"><img class="mk-d" src="mark-light.png" alt="" width="48" height="47"></span><figcaption class="mono">Autoportret · Lumix S5II</figcaption></figure>
         <div>
-          <p class="label">O mnie</p>
+          <p class="label"><span class="idx">05</span>O mnie</p>
           <h2>Cześć, jestem Michał</h2>
           <div class="txt">
             <p>Mieszkam w Lubawce i od roku fotografuję oraz nagrywam rolki dla firm. Teraz łączę to z tworzeniem stron, więc strona i zdjęcia powstają u jednej osoby i od razu do siebie pasują.</p>
@@ -1147,7 +1215,7 @@
   <section class="block contact" id="kontakt">
     <div class="wrap">
       <div>
-        <p class="label">Kontakt</p>
+        <p class="label"><span class="idx">06</span>Kontakt</p>
         <h2>Porozmawiajmy o Twojej firmie</h2>
         <p class="lead">Zadzwoń, napisz na WhatsAppie albo mailem, czym się zajmujesz i gdzie jesteś. Odpisuję zwykle w ciągu jednego dnia i umawiamy krótkie spotkanie. Wycena jest bezpłatna.</p>
         <div class="c-ctas">
@@ -1728,6 +1796,21 @@
       }catch(e){fallback()}
     });
   });
+</script>
+<script>
+/* Menu: underline the section you are reading */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]:not(.btn)'));
+  if(!links.length||!('IntersectionObserver' in window))return;
+  var byId={},seen={};
+  links.forEach(function(a){byId[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){seen[e.target.id]=e.isIntersecting});
+    var cur=null;Object.keys(byId).forEach(function(id){if(seen[id])cur=id});
+    links.forEach(function(a){a.classList.toggle('is-active',!!cur&&a===byId[cur])});
+  },{rootMargin:'-45% 0px -50% 0px'});
+  Object.keys(byId).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s)});
+})();
 </script>
 </body>
 </html>
