@@ -472,6 +472,36 @@
   .m-sticky span{flex:1;display:grid;place-items:center;height:32px;border-radius:12px;color:#F1E9DC;font-size:11px;font-weight:600}
   .m-sticky span:first-child{background:#E9B35F;color:#1A140B}
   /* inn */
+  @font-face{font-family:"Barlow Condensed";src:url("fonts/barlow-condensed-800.woff2") format("woff2");font-weight:800;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F}
+  @font-face{font-family:"Barlow Condensed";src:url("fonts/barlow-condensed-800-ext.woff2") format("woff2");font-weight:800;font-display:swap;unicode-range:U+0100-024F}
+  a.phone{display:block;color:inherit;text-decoration:none}
+  .screen:has(.s-cang){background:#111110}
+  .s-cang{background:#111110;color:#F3F1EA;font-family:var(--display)}
+  .s-cang .m-nav{padding:40px 12px 8px}
+  .s-cang .m-nav img{display:block;width:104px;height:auto}
+  .c-call{padding:6px 8px;background:#F5B315;color:#111110;font:800 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.03em;clip-path:polygon(0 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%)}
+  .c-haz{height:4px;background:repeating-linear-gradient(-45deg,#F5B315 0 6px,#111110 6px 12px)}
+  .s-cang .m-photo{height:190px;overflow:hidden}
+  .s-cang .m-photo::before{display:none}
+  .c-tape{position:absolute;left:-10%;right:-10%;bottom:14px;transform:rotate(-4deg);background:#F5B315;color:#111110;padding:5px 0;white-space:nowrap;overflow:hidden;font:800 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.04em;text-transform:uppercase;text-align:center}
+  .c-k{margin-bottom:8px;font:800 9px/1 "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#F5B315}
+  .c-h{font:800 27px/.92 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:-.005em;white-space:nowrap}
+  .c-h i{font-style:normal;color:#F5B315}
+  .c-prices{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:2px 0 6px;background:#2F2E2A;border-block:2px solid #2F2E2A}
+  .c-prices p{display:grid;gap:3px;padding:10px 12px;background:#111110}
+  .c-prices small{font-size:8.5px;color:#BDB8AC;line-height:1.1}
+  .c-prices b{font:800 21px/1 "Barlow Condensed",sans-serif;color:#F5B315}
+  .c-prices b i{font-style:normal;font-size:11px;color:#BDB8AC;margin-left:2px}
+  .s-cang .m-t{color:#F5B315;opacity:1}
+  .c-row{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:11.5px;border-bottom:1px solid #2F2E2A}
+  .c-row span{width:13px;height:13px;border:2px solid #5a5850;flex:none}
+  .c-row.on span{background:#F5B315;border-color:#F5B315}
+  .c-send{margin-top:10px;padding:9px 10px;background:#22221F;border-left:4px solid #25D366;font-size:10.5px;font-weight:600;color:#F3F1EA}
+  .c-sticky{border-radius:0;background:rgba(17,17,16,.94)}
+  .c-sticky span{border-radius:0;font-family:"Barlow Condensed",sans-serif;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  .c-sticky span:first-child{background:#F5B315;color:#111110}
+  .c-sticky span:last-child{background:#22221F;color:#F3F1EA}
+  .w-live{display:inline-flex;align-items:center;gap:8px;justify-self:start;font-weight:600;font-size:16px;color:var(--ink,inherit);text-decoration:underline;text-underline-offset:4px}
   .s-inn{background:#F2F4EE;color:#1F2A1E;--pin:#4C672A}
   .s-inn .m-h{color:#fff;font-size:27px}
   .s-inn .m-btn{margin-top:12px;background:#fff;color:#1F2A1E}
@@ -814,42 +844,43 @@
       <div class="sec-head">
         <p class="label" data-r>Realizacje</p>
         <h2 id="realizacje-h" data-r>Tak może wyglądać <em>Twoja strona</em></h2>
-        <p data-r>To przykładowe projekty, które pokazują mój styl. Pierwsze strony dla firm z regionu właśnie powstają i wkrótce pokażę je tutaj.</p>
+        <p data-r>Pierwsza strona dla firmy z regionu już działa – CAN z Kamiennej Góry. Pozostałe to przykładowe projekty, które pokazują mój styl.</p>
       </div>
 
       <div class="works">
         <article class="work" data-r>
           <div class="stage">
-            <div class="phone" role="img" aria-label="Przykładowy projekt: strona restauracji wyświetlona na telefonie" data-nosnippet>
+            <a class="phone" href="https://cang.pl" target="_blank" rel="noopener" aria-label="Strona CAN – ziemia, kruszywa i koparki z Kamiennej Góry (otwiera cang.pl)">
               <div class="screen">
-                <div class="site s-bistro" aria-hidden="true">
+                <div class="site s-cang" aria-hidden="true">
+                  <div class="m-nav"><b><img src="cang-logo.svg" alt="" width="633" height="114" loading="lazy"></b><span class="c-call">504 409 208</span></div>
+                  <div class="c-haz"></div>
                   <div class="m-photo">
-                    <div class="m-nav m-over"><b>Taras</b><i></i></div>
-                    <img src="chorwacja-latarnie.jpg" alt="" width="1000" height="667" loading="lazy" decoding="async">
-                    <div class="m-cap"><p class="m-h">Kolacja<br>przy latarniach</p><span class="m-btn">Zarezerwuj stolik</span></div>
+                    <img src="cang-koparka.jpg" alt="" width="540" height="720" loading="lazy" decoding="async">
+                    <div class="c-tape"><span>Transport gratis od 25 ton ◆ Ziemia przesiana 80 zł/t ◆</span></div>
                   </div>
                   <div class="m-sec">
-                    <p class="m-t">Dziś polecamy</p>
-                    <p class="m-row"><span>Pierogi z kaszanką</span><em></em><span>32 zł</span></p>
-                    <p class="m-row"><span>Pstrąg z ziołami</span><em></em><span>46 zł</span></p>
-                    <p class="m-row"><span>Sernik z rabarbarem</span><em></em><span>19 zł</span></p>
+                    <p class="c-k">Ziemia · Kruszywa · Usługi budowlane</p>
+                    <p class="c-h">Solidne<br>materiały<br><i>i doświadczeni<br>ludzie</i></p>
                   </div>
+                  <div class="c-prices"><p><small>Ziemia przesiana</small><b>80 zł<i>/t</i></b></p><p><small>Granit 0/31</small><b>45 zł<i>/t</i></b></p><p><small>Koparko-ładowarka</small><b>200 zł<i>/h</i></b></p><p><small>Minikoparka</small><b>120 zł<i>/h</i></b></p></div>
                   <div class="m-sec">
-                    <p class="m-t">Godziny</p>
-                    <p class="m-row"><span>Wt–Nd</span><em></em><span>12:00–22:00</span></p>
-                    <p class="m-row"><span>Poniedziałek</span><em></em><span>nieczynne</span></p>
+                    <p class="m-t">Zlecenie przez WhatsApp</p>
+                    <p class="c-row on"><span></span>Ziemia przesiana – 4 t</p>
+                    <p class="c-row on"><span></span>Koparko-ładowarka – 3 h</p>
+                    <p class="c-row"><span></span>Ekipa 3-osobowa</p>
+                    <p class="c-send">Przesuń, aby wysłać →</p>
                   </div>
-                  <div class="m-map"></div>
                   <div style="height:56px"></div>
                 </div>
-                <div class="m-sticky" aria-hidden="true"><span>Zadzwoń</span><span>Dojazd</span><span>Menu</span></div>
+                <div class="m-sticky c-sticky" aria-hidden="true"><span>Zadzwoń</span><span>Zlecenie 2</span></div>
               </div>
-            </div>
+            </a>
           </div>
-          <div class="w-meta"><h3>Bistro „Taras”</h3><span>Przykładowy projekt · restauracja</span></div>
-          <p>Rezerwacja stolika jednym dotknięciem i menu dnia zawsze pod ręką.</p>
+          <div class="w-meta"><h3>CAN – ziemia i kruszywa</h3><span>Realizacja · Kamienna Góra</span></div>
+          <p>Ceny na wierzchu i zamówienie przez WhatsApp: klient zaznacza, czego potrzebuje, a gotowa wiadomość sama się pisze.</p>
+          <a class="w-live" href="https://cang.pl" target="_blank" rel="noopener">Zobacz na żywo: cang.pl<svg class="ic arr"><use href="#i-arr"/></svg></a>
         </article>
-
         <article class="work" data-r>
           <div class="stage">
             <div class="phone" role="img" aria-label="Przykładowy projekt: strona pensjonatu wyświetlona na telefonie" data-nosnippet>
