@@ -49,10 +49,36 @@
       .to(badges, { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.14, ease: 'back.out(1.7)' }, 1.05);
   }
 
-  /* ---------- Zmieniające się słowo w nagłówku (port RotatingText z react-bits) ---------- */
+  /* ---------- Nagłówek: strony albo zdjęcia (przełącznik + RotatingText z react-bits) ---------- */
   const rot = document.querySelector('.rot');
-  if (rot && motion) {
-    const words = rot.dataset.words.split('|');
+  const modeBtns = Array.from(document.querySelectorAll('.mode-sw [data-mode]'));
+  if (rot && hero && modeBtns.length) {
+    const WORDS = { web: rot.dataset.words.split('|'), photo: rot.dataset.photo.split('|') };
+    const TEXT = {
+      web: { a: 'Strona dla', b: 'w&nbsp;3&nbsp;dni.', cap: 'Przykładowy projekt · kawiarnia' },
+      photo: { a: 'Zdjęcia', b: 'które zostają.', cap: 'Zdjęcia z mojego aparatu' }
+    };
+    /* Zestawy zdjęć do aparatu – wszystkie z mojego aparatu */
+    const SETS = {
+      'na ślub': ['madera-wschod-para', 'madera-kwiat', 'praga-most'],
+      'na 18-stkę': ['festiwal-turkus', 'festiwal-pomarancz', 'festiwal-dym'],
+      'na studniówkę': ['festiwal-niebieski', 'festiwal-pion', 'chorwacja-latarnie'],
+      'dla salonu': ['nc-13', 'nc-02', 'nc-08'],
+      'dla firmy': ['nc-09', 'praga-auto', 'nc-12']
+    };
+    const FAN = [{ x: -62, y: 10, r: -11 }, { x: 0, y: -8, r: 2 }, { x: 62, y: 12, r: 12 }];
+    const lnA = hero.querySelector('.ln-a');
+    const lnB = hero.querySelector('.ln-b');
+    const srWord = hero.querySelector('.ln-rot .sr-only');
+    const visual = hero.querySelector('.hero-visual');
+    const phone = visual.querySelector('.phone');
+    const badgesEl = visual.querySelectorAll('.badge');
+    const camEl = visual.querySelector('.cam');
+    const flashEl = visual.querySelector('.flash');
+    const shotEls = Array.from(visual.querySelectorAll('.shot'));
+    const capEl = visual.querySelector('.cap-t');
+    const thumb = hero.querySelector('.mode-thumb');
+
     const seg = window.Intl && Intl.Segmenter ? new Intl.Segmenter('pl', { granularity: 'grapheme' }) : null;
     const chars = (s) => (seg ? Array.from(seg.segment(s), (x) => x.segment) : Array.from(s));
     const build = (word) => {
@@ -61,40 +87,139 @@
       chars(word).forEach((c) => {
         const s = document.createElement('span');
         s.className = 'rot-c';
-        s.textContent = c === ' ' ? ' ' : c;
+        s.textContent = c === ' ' ? '\u00a0' : c;
         w.appendChild(s);
       });
       return w;
     };
-
-    let idx = 0;
-    let cur = build(words[0]);
+    let cur = build(WORDS.web[0]);
     rot.textContent = '';
     rot.appendChild(cur);
 
+    let mode = 'web';
+    let idx = 0;
+    let turns = 0;
     let timer = null;
-    let done = false;
-    const swap = () => {
-      idx = (idx + 1) % words.length;
+    let visible = true;
+    let warm = false;
+
+    const placeThumb = () => {
+      const on = modeBtns.find((b) => b.dataset.mode === mode);
+      thumb.style.width = on.offsetWidth + 'px';
+      thumb.style.transform = 'translateX(' + (on.offsetLeft - 4) + 'px)';
+    };
+    placeThumb();
+    addEventListener('resize', placeThumb, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeThumb);
+
+    const showWord = (word) => {
+      if (srWord) srWord.textContent = word;
       const old = cur;
-      cur = build(words[idx]);
+      cur = build(word);
+      if (!motion) { rot.textContent = ''; rot.appendChild(cur); return; }
       gsap.set(old, { position: 'absolute', left: 0, top: 0 });
       rot.appendChild(cur);
       gsap.to(old.children, { yPercent: -120, opacity: 0, duration: 0.42, stagger: 0.016, ease: 'power3.in', onComplete: () => old.remove() });
       gsap.fromTo(cur.children, { yPercent: 105, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.7, stagger: 0.022, ease: 'power4.out', delay: 0.16 });
-      // Jedno pełne okrążenie, potem zatrzymanie na „Twojej firmy”
-      if (idx === 0) { done = true; stop(); }
     };
-    const start = () => { if (!timer && !done) timer = setInterval(swap, 2300); };
+    const swapLine = (el, html) => {
+      if (!el || el.innerHTML === html) return;
+      if (!motion) { el.innerHTML = html; return; }
+      gsap.killTweensOf(el);
+      gsap.to(el, { yPercent: -115, duration: 0.32, ease: 'power3.in', onComplete: () => {
+        el.innerHTML = html;
+        gsap.fromTo(el, { yPercent: 115 }, { yPercent: 0, duration: 0.7, ease: 'power4.out' });
+      } });
+    };
+    // Aparat „robi zdjęcie”: błysk i trzy odbitki wylatujące z obiektywu
+    const shoot = (word) => {
+      const set = SETS[word];
+      if (!set) return;
+      if (!motion) {
+        shotEls.forEach((img, i) => {
+          img.src = 'cam-' + set[i] + '.jpg';
+          img.style.opacity = 1;
+          img.style.transform = 'translate(-50%,-50%) translate(' + FAN[i].x + 'px,' + FAN[i].y + 'px) rotate(' + FAN[i].r + 'deg)';
+        });
+        return;
+      }
+      gsap.timeline()
+        .to(camEl, { scale: 0.97, y: 4, duration: 0.09, ease: 'power2.in', transformOrigin: '50% 100%' })
+        .to(camEl, { scale: 1, y: 0, duration: 0.5, ease: 'elastic.out(1,.5)' })
+        .fromTo(flashEl, { opacity: 0.95, scale: 0.2 }, { opacity: 0, scale: 1.4, duration: 0.6, ease: 'power2.out' }, 0.05);
+      shotEls.forEach((img, i) => {
+        gsap.killTweensOf(img);
+        gsap.to(img, { opacity: 0, y: '-=60', duration: 0.25, ease: 'power2.in', delay: i * 0.03, onComplete: () => {
+          img.src = 'cam-' + set[i] + '.jpg';
+          const f = FAN[i];
+          gsap.fromTo(img, { xPercent: -50, yPercent: -50, x: 0, y: 150, scale: 0.25, rotate: 0, opacity: 0 },
+            { x: f.x, y: f.y, scale: 1, rotate: f.r, opacity: 1, duration: 0.9, ease: 'back.out(1.4)', delay: 0.1 + i * 0.08 });
+        } });
+      });
+    };
+
+    const tick = () => {
+      if (document.hidden || !visible) return;
+      const list = WORDS[mode];
+      idx = (idx + 1) % list.length;
+      if (idx === 0) turns += 1;
+      showWord(list[idx]);
+      if (mode === 'photo') shoot(list[idx]);
+      if (turns >= 2) stop(); // dwa okrążenia, potem spokój
+    };
+    const start = () => { if (motion && !timer) timer = setInterval(tick, 2400); };
     const stop = () => { clearInterval(timer); timer = null; };
 
-    setTimeout(() => {
+    const setMode = (m) => {
+      if (m === mode) return;
+      mode = m;
+      idx = 0;
+      turns = 0;
+      hero.dataset.mode = m;
+      modeBtns.forEach((b) => b.setAttribute('aria-checked', String(b.dataset.mode === m)));
+      placeThumb();
+      swapLine(lnA, TEXT[m].a);
+      swapLine(lnB, TEXT[m].b);
+      swapLine(capEl, TEXT[m].cap);
+      showWord(WORDS[m][0]);
+      if (!warm) { warm = true; Object.values(SETS).flat().forEach((n) => { new Image().src = 'cam-' + n + '.jpg'; }); }
+      if (motion) {
+        gsap.fromTo(hero.querySelectorAll('[data-for="' + m + '"]'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.06, ease: 'power3.out' });
+        if (m === 'photo') {
+          gsap.fromTo(camEl, { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85, ease: 'power4.out' });
+          setTimeout(() => { if (mode === 'photo') shoot(WORDS.photo[idx]); }, 550);
+        } else {
+          gsap.fromTo(phone, { opacity: 0, scale: 0.86, rotateY: 35, y: 30 }, { opacity: 1, scale: 1, rotateY: 0, y: 0, duration: 0.85, ease: 'power3.out' });
+          gsap.fromTo(badgesEl, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, delay: 0.5, ease: 'back.out(1.7)' });
+        }
+      } else if (m === 'photo') {
+        shoot(WORDS.photo[0]);
+      }
+      stop();
       start();
-      // Pauza, gdy nagłówek jest poza ekranem; po powrocie jeszcze jedno okrążenie
-      new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) { if (done && idx === 0) done = false; start(); } else stop();
-      }).observe(rot);
-    }, 1900);
+    };
+
+    modeBtns.forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+    // Strzałki na klawiaturze w grupie przycisków
+    hero.querySelector('.mode-sw').addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const next = mode === 'web' ? 'photo' : 'web';
+      setMode(next);
+      modeBtns.find((b) => b.dataset.mode === next).focus();
+    });
+    // Kliknięcie w telefon albo aparat też przełącza
+    visual.addEventListener('click', () => setMode(mode === 'web' ? 'photo' : 'web'));
+
+    if (motion) {
+      setTimeout(() => {
+        start();
+        new IntersectionObserver(([e]) => {
+          visible = e.isIntersecting;
+          if (visible) { turns = 0; start(); } else stop();
+        }).observe(rot);
+      }, 1900);
+    }
   }
 
   /* ---------- Tekst odsłaniany słowo po słowie (port ScrollReveal z react-bits) ---------- */
@@ -294,7 +419,7 @@
   if (location.hash === '#polityka-prywatnosci') openDialog(pp);
 
   const lb = document.getElementById('lb');
-  const shots = Array.from(document.querySelectorAll('#photos [data-full]'));
+  let shots = [];
   const lbImg = document.getElementById('lb-img');
   let li = 0;
   const show = (i) => {
@@ -309,7 +434,11 @@
     document.getElementById('lb-cap').textContent = it.dataset.cap;
     document.getElementById('lb-count').textContent = (li + 1) + ' / ' + shots.length;
   };
-  shots.forEach((s, i) => s.addEventListener('click', () => { show(i); openDialog(lb); }));
+  // Każdy pasek zdjęć ma własną kolejkę w powiększeniu
+  document.querySelectorAll('.photos').forEach((row) => {
+    const list = Array.from(row.querySelectorAll('[data-full]'));
+    list.forEach((s, i) => s.addEventListener('click', () => { shots = list; show(i); openDialog(lb); }));
+  });
   lb.querySelector('.lb-prev').addEventListener('click', () => show(li - 1));
   lb.querySelector('.lb-next').addEventListener('click', () => show(li + 1));
   lb.addEventListener('keydown', (e) => {
@@ -327,8 +456,8 @@
   });
 
   /* ---------- Strzałki pod galerią (komputer) ---------- */
-  const strip = document.getElementById('photos');
   document.querySelectorAll('[data-ph]').forEach((b) => b.addEventListener('click', () => {
+    const strip = b.closest('.ph-wrap').querySelector('.photos');
     strip.scrollBy({ left: Number(b.dataset.ph) * strip.clientWidth * 0.8, behavior: reduce ? 'auto' : 'smooth' });
   }));
 })();

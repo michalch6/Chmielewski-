@@ -153,6 +153,30 @@
   .badge.b1{left:-18%;top:20%}
   .badge.b2{right:-16%;bottom:18%}
   @media (max-width:479px){.badge.b1{left:-12%}.badge.b2{right:-10%}}
+  /* Przełącznik „Co Cię interesuje?” */
+  .mode{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:30px}
+  .mode-q{font:400 12.5px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--on-night-2)}
+  .mode-sw{position:relative;display:inline-flex;padding:4px;border-radius:999px;background:rgba(236,239,230,.06);border:1px solid var(--night-line)}
+  .mode-sw button{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border:0;border-radius:999px;background:none;color:var(--on-night);font:600 15.5px/1 var(--display);white-space:nowrap;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;transition:color .35s var(--ease-out)}
+  .mode-sw button:active{transform:scale(.97)}
+  .mode-sw button[aria-checked="true"]{color:var(--night)}
+  .mode-sw .ic{width:18px;height:18px}
+  .mode-thumb{position:absolute;left:0;top:4px;bottom:4px;width:0;border-radius:999px;background:var(--lime);box-shadow:0 8px 24px -10px rgba(185,220,122,.7);transition:transform .5s var(--ease-out),width .5s var(--ease-out)}
+  @media (hover:hover) and (pointer:fine){.mode-sw button[aria-checked="false"]:hover{color:var(--lime)}}
+  @media (max-width:389px){.mode-sw button{padding:0 13px;font-size:14.5px;gap:6px}}
+  html:not(.js) .mode{display:none}
+  .hero:not([data-mode="photo"]) [data-for="photo"],.hero[data-mode="photo"] [data-for="web"]{display:none!important}
+  .hero[data-mode="photo"] .cam-stage{visibility:visible}
+  .hero[data-mode="photo"] .hero-visual .phone,.hero[data-mode="photo"] .badge{visibility:hidden}
+  .hero-visual{cursor:pointer}
+
+  /* Aparat ze zdjęciami (tryb „fotografia” w nagłówku) */
+  .cam-stage{position:absolute;inset:0 0 34px 0;pointer-events:none;visibility:hidden}
+  .cam{position:absolute;left:-6%;right:-6%;bottom:2%;width:112%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+  .shots{position:absolute;inset:14% 0 30% 0}
+  .shot{position:absolute;left:50%;top:50%;opacity:0;width:52%;aspect-ratio:3/4;object-fit:cover;border:6px solid #F4F2EA;border-bottom-width:18px;border-radius:6px;background:#20251D;box-shadow:0 24px 40px -18px rgba(0,0,0,.75);transform:translate(-50%,-50%)}
+  .flash{position:absolute;left:50%;bottom:16%;width:120%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(207,232,161,.35) 40%,rgba(207,232,161,0) 70%);transform:translate(-50%,40%) scale(0);opacity:0}
+  .cap-t{display:inline-block}
   .cap{margin-top:18px;text-align:center;font:400 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--on-night-2)}
   @media (min-width:1000px){.cap{transform:rotate(4deg)}}
 
@@ -306,7 +330,8 @@
     .works::-webkit-scrollbar{display:none}
     .work{scroll-snap-align:start}
   }
-  @media (min-width:900px){.works{grid-template-columns:repeat(3,1fr);align-items:start}.work:nth-child(2){margin-top:72px}}
+  @media (min-width:900px){.works{grid-template-columns:repeat(2,1fr);align-items:start}.work:nth-child(even){margin-top:72px}}
+  @media (min-width:1180px){.works{grid-template-columns:repeat(4,1fr)}}
   .work{display:grid;gap:18px;align-content:start}
   .stage{display:grid;place-items:center;min-height:540px;padding:36px 0;border-radius:var(--r-lg);background:var(--paper-2);overflow:hidden}
   .work .phone{width:236px}
@@ -505,6 +530,30 @@
   .w-logo{display:grid;place-items:center;flex:none;width:52px;height:52px;border-radius:12px;background:#111110}
   .w-logo img{width:40px;height:auto}
   .w-live{display:inline-flex;align-items:center;gap:8px;justify-self:start;font-weight:600;font-size:16px;color:var(--ink,inherit);text-decoration:underline;text-underline-offset:4px}
+  /* noble cut */
+  .screen:has(.s-nc){background:#141414}
+  .s-nc{background:#141414;color:#F4EFE4}
+  .s-nc .m-nav{padding:42px 12px 8px;border-bottom:1px solid #35312A}
+  .s-nc .m-nav img{display:block;width:96px;height:auto}
+  .n-call{padding:6px 9px;background:#D9B66C;color:#141414;font-size:10.5px;font-weight:700}
+  .n-hero{padding:16px 14px 6px}
+  .n-h{font:700 25px/1 Georgia,"Times New Roman",serif;text-transform:uppercase;letter-spacing:-.01em}
+  .n-h i{font-style:normal;color:#D9B66C}
+  .n-lead{margin-top:8px;font-size:11px;color:#B9B2A3}
+  .n-lead b{color:#F4EFE4}
+  .n-shield{position:relative;width:150px;margin:16px auto 6px;aspect-ratio:100/124;clip-path:polygon(0 0,100% 0,100% 62%,96% 72%,88% 81%,76% 89%,62% 95%,50% 100%,38% 95%,24% 89%,12% 81%,4% 72%,0 62%);background:#D9B66C;padding:3px}
+  .n-shield img{width:100%;height:100%;object-fit:cover;clip-path:inherit}
+  .n-strip{margin:12px 0 4px;padding:8px 0;border-block:1px solid #35312A;background:#1C1B19;color:#D9B66C;white-space:nowrap;overflow:hidden;font:700 12px/1 Georgia,serif;letter-spacing:.08em;text-transform:uppercase}
+  .s-nc .m-t{color:#F2DDA6;opacity:1}
+  .n-price{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;padding:10px 11px;background:#1C1B19;border:1px solid #35312A;font-size:11.5px;font-weight:600}
+  .n-price b{font-size:20px;color:#D9B66C;white-space:nowrap}
+  .n-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:0 14px}
+  .n-grid img{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid #9B7A3D}
+  .n-sticky{border-radius:0;background:rgba(20,20,20,.94)}
+  .n-sticky span{border-radius:0}
+  .n-sticky span:first-child{background:#D9B66C;color:#141414}
+  .w-logo.w-logo-nc{background:#141414}
+  .w-logo-nc img{width:30px}
   .s-inn{background:#F2F4EE;color:#1F2A1E;--pin:#4C672A}
   .s-inn .m-h{color:#fff;font-size:27px}
   .s-inn .m-btn{margin-top:12px;background:#fff;color:#1F2A1E}
@@ -570,6 +619,8 @@
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.7"/></symbol>
   <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 2c4.6 3.4 5.6 9.2 0 20C6.4 11.2 7.4 5.4 12 2z"/></symbol>
 </svg>
 
@@ -599,23 +650,40 @@
     <span class="glow g1" aria-hidden="true"></span><span class="glow g2" aria-hidden="true"></span>
     <div class="wrap hero-grid">
       <div>
+        <div class="mode" data-i>
+          <span class="mode-q" id="mode-q">Co Cię interesuje?</span>
+          <div class="mode-sw" role="radiogroup" aria-labelledby="mode-q">
+            <i class="mode-thumb" aria-hidden="true"></i>
+            <button type="button" role="radio" aria-checked="true" data-mode="web"><svg class="ic"><use href="#i-globe"/></svg>Strona internetowa</button>
+            <button type="button" role="radio" aria-checked="false" data-mode="photo"><svg class="ic"><use href="#i-cam"/></svg>Zdjęcia</button>
+          </div>
+        </div>
         <h1 class="h1">
-          <span class="kick" data-i><b>Strony internetowe dla firm</b> · Lubawka · Kamienna Góra · Wałbrzych · Wrocław</span>
-          <span class="ln"><span>Strona dla</span></span>
-          <span class="ln ln-rot"><span><span class="sr-only">Twojej firmy</span><span class="rot" aria-hidden="true" data-words="Twojej firmy|kawiarni|restauracji|salonu|pensjonatu|warsztatu|gabinetu|sklepu">Twojej firmy</span></span></span>
-          <span class="ln"><span>w&nbsp;3&nbsp;dni.</span></span>
+          <span class="kick" data-i><b>Strony internetowe i fotografia</b> · Lubawka · Kamienna Góra · Wałbrzych · Wrocław</span>
+          <span class="ln"><span class="ln-a">Strona dla</span></span>
+          <span class="ln ln-rot"><span><span class="sr-only">Twojej firmy</span><span class="rot" aria-hidden="true" data-words="Twojej firmy|kawiarni|restauracji|salonu|pensjonatu|warsztatu" data-photo="na ślub|na 18-stkę|na studniówkę|dla salonu|dla firmy">Twojej firmy</span></span></span>
+          <span class="ln"><span class="ln-b">w&nbsp;3&nbsp;dni.</span></span>
         </h1>
-        <p class="lead" data-i>Nowoczesna strona i profesjonalne zdjęcia Twojego lokalu, <strong>połowa płatności dopiero po oddaniu</strong>. Domena na pierwszy rok i hosting w cenie. Ty prowadzisz firmę, ja zajmę się resztą.</p>
+        <p class="lead" data-i data-for="web">Nowoczesna strona i profesjonalne zdjęcia Twojego lokalu, <strong>połowa płatności dopiero po oddaniu</strong>. Domena na pierwszy rok i hosting w cenie. Ty prowadzisz firmę, ja zajmę się resztą.</p>
+        <p class="lead" data-i data-for="photo">Sesje ślubne, osiemnastki, studniówki i&nbsp;zdjęcia dla firm. Napisz, jaki masz termin i&nbsp;co się będzie działo, a&nbsp;odpiszę z&nbsp;wyceną.</p>
         <div class="ctas" data-i>
-          <span class="magnet"><a class="btn btn-lime" href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20strony%20internetowej%20dla%20mojej%20firmy." target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>Napisz na WhatsApp</a></span>
+          <span class="magnet" data-for="photo"><a class="btn btn-lime" href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20sesji%20zdj%C4%99ciowej." target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>Napisz na WhatsApp</a></span>
+          <span class="magnet" data-for="web"><a class="btn btn-lime" href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20strony%20internetowej%20dla%20mojej%20firmy." target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>Napisz na WhatsApp</a></span>
           <a class="btn btn-ghost" href="tel:+48736842214"><svg class="ic"><use href="#i-phone"/></svg>Zadzwoń: 736 842 214</a>
         </div>
-        <p class="micro" data-i>Pierwsze spotkanie jest bezpłatne i do niczego nie zobowiązuje.</p>
-        <ul class="ticks" data-i aria-label="W cenie">
+        <p class="micro" data-i data-for="web">Pierwsze spotkanie jest bezpłatne i do niczego nie zobowiązuje.</p>
+        <p class="micro" data-i data-for="photo">Wycena jest bezpłatna i do niczego nie zobowiązuje.</p>
+        <ul class="ticks" data-i data-for="web" aria-label="W cenie">
           <li><svg class="ic"><use href="#i-check"/></svg>Gotowa w ok. 3 dni</li>
           <li><svg class="ic"><use href="#i-check"/></svg>Domena na rok w cenie</li>
           <li><svg class="ic"><use href="#i-check"/></svg>Darmowy hosting</li>
           <li><svg class="ic"><use href="#i-check"/></svg>Sesja zdjęciowa gratis</li>
+        </ul>
+        <ul class="ticks" data-i data-for="photo" aria-label="Fotografuję">
+          <li><svg class="ic"><use href="#i-check"/></svg>Śluby</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Osiemnastki</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Studniówki</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Zdjęcia dla firm</li>
         </ul>
       </div>
 
@@ -649,14 +717,38 @@
         </div>
         <div class="badge b1" aria-hidden="true"><i><svg class="ic"><use href="#i-clock"/></svg></i><span>Gotowa w ok. 3 dni<small>od spotkania do startu</small></span></div>
         <div class="badge b2" aria-hidden="true"><i><svg class="ic"><use href="#i-phone"/></svg></i><span>Klient dzwoni<small>jednym dotknięciem</small></span></div>
-        <p class="cap">Przykładowy projekt · kawiarnia</p>
+        <div class="cam-stage" aria-hidden="true">
+          <div class="shots"><img class="shot" alt=""><img class="shot" alt=""><img class="shot" alt=""></div>
+          <span class="flash"></span>
+          <svg class="cam" viewBox="0 0 320 196">
+            <defs>
+              <radialGradient id="cam-glass" cx="42%" cy="38%" r="70%"><stop offset="0" stop-color="#3A4A3C"/><stop offset=".45" stop-color="#141A15"/><stop offset="1" stop-color="#050705"/></radialGradient>
+              <linearGradient id="cam-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A3026"/><stop offset="1" stop-color="#151913"/></linearGradient>
+            </defs>
+            <path d="M112 30h96l12 24H100z" fill="#20251D"/>
+            <rect x="122" y="22" width="76" height="12" rx="5" fill="#2A3026"/>
+            <rect x="54" y="40" width="40" height="14" rx="5" fill="#2A3026"/>
+            <rect class="cam-btn" x="236" y="38" width="34" height="12" rx="6" fill="#B9DC7A"/>
+            <rect x="14" y="50" width="292" height="138" rx="26" fill="url(#cam-body)" stroke="rgba(236,239,230,.14)"/>
+            <rect x="228" y="50" width="78" height="138" rx="26" fill="#1B2018"/>
+            <path d="M14 104h292" stroke="rgba(236,239,230,.06)" stroke-width="18"/>
+            <circle cx="142" cy="120" r="62" fill="#0B0E0A" stroke="rgba(236,239,230,.16)" stroke-width="2"/>
+            <circle cx="142" cy="120" r="54" fill="none" stroke="#B9DC7A" stroke-width="1.5" opacity=".7"/>
+            <circle cx="142" cy="120" r="46" fill="#121611" stroke="#2A3026" stroke-width="5"/>
+            <circle cx="142" cy="120" r="34" fill="url(#cam-glass)"/>
+            <ellipse cx="128" cy="104" rx="11" ry="7" fill="#fff" opacity=".28" transform="rotate(-30 128 104)"/>
+            <circle cx="158" cy="134" r="4" fill="#B9DC7A" opacity=".55"/>
+            <circle cx="262" cy="74" r="5" fill="#B9DC7A"/>
+          </svg>
+        </div>
+        <p class="cap"><span class="cap-t">Przykładowy projekt · kawiarnia</span></p>
       </div>
     </div>
 
     <div class="marquee" aria-hidden="true">
       <div class="mq">
-        <span>Kawiarnie<svg class="ic"><use href="#i-leaf"/></svg>Restauracje<svg class="ic"><use href="#i-leaf"/></svg>Salony fryzjerskie<svg class="ic"><use href="#i-leaf"/></svg>Salony kosmetyczne<svg class="ic"><use href="#i-leaf"/></svg>Pensjonaty<svg class="ic"><use href="#i-leaf"/></svg>Warsztaty<svg class="ic"><use href="#i-leaf"/></svg>Gabinety<svg class="ic"><use href="#i-leaf"/></svg>Sklepy<svg class="ic"><use href="#i-leaf"/></svg>Usługi lokalne<svg class="ic"><use href="#i-leaf"/></svg></span>
-        <span>Kawiarnie<svg class="ic"><use href="#i-leaf"/></svg>Restauracje<svg class="ic"><use href="#i-leaf"/></svg>Salony fryzjerskie<svg class="ic"><use href="#i-leaf"/></svg>Salony kosmetyczne<svg class="ic"><use href="#i-leaf"/></svg>Pensjonaty<svg class="ic"><use href="#i-leaf"/></svg>Warsztaty<svg class="ic"><use href="#i-leaf"/></svg>Gabinety<svg class="ic"><use href="#i-leaf"/></svg>Sklepy<svg class="ic"><use href="#i-leaf"/></svg>Usługi lokalne<svg class="ic"><use href="#i-leaf"/></svg></span>
+        <span>Sesje ślubne<svg class="ic"><use href="#i-leaf"/></svg>Osiemnastki<svg class="ic"><use href="#i-leaf"/></svg>Studniówki<svg class="ic"><use href="#i-leaf"/></svg>Kawiarnie<svg class="ic"><use href="#i-leaf"/></svg>Restauracje<svg class="ic"><use href="#i-leaf"/></svg>Salony fryzjerskie<svg class="ic"><use href="#i-leaf"/></svg>Salony kosmetyczne<svg class="ic"><use href="#i-leaf"/></svg>Pensjonaty<svg class="ic"><use href="#i-leaf"/></svg>Warsztaty<svg class="ic"><use href="#i-leaf"/></svg>Gabinety<svg class="ic"><use href="#i-leaf"/></svg>Sklepy<svg class="ic"><use href="#i-leaf"/></svg>Usługi lokalne<svg class="ic"><use href="#i-leaf"/></svg></span>
+        <span>Sesje ślubne<svg class="ic"><use href="#i-leaf"/></svg>Osiemnastki<svg class="ic"><use href="#i-leaf"/></svg>Studniówki<svg class="ic"><use href="#i-leaf"/></svg>Kawiarnie<svg class="ic"><use href="#i-leaf"/></svg>Restauracje<svg class="ic"><use href="#i-leaf"/></svg>Salony fryzjerskie<svg class="ic"><use href="#i-leaf"/></svg>Salony kosmetyczne<svg class="ic"><use href="#i-leaf"/></svg>Pensjonaty<svg class="ic"><use href="#i-leaf"/></svg>Warsztaty<svg class="ic"><use href="#i-leaf"/></svg>Gabinety<svg class="ic"><use href="#i-leaf"/></svg>Sklepy<svg class="ic"><use href="#i-leaf"/></svg>Usługi lokalne<svg class="ic"><use href="#i-leaf"/></svg></span>
       </div>
     </div>
   </section>
@@ -847,7 +939,7 @@
       <div class="sec-head">
         <p class="label" data-r>Realizacje</p>
         <h2 id="realizacje-h" data-r>Tak może wyglądać <em>Twoja strona</em></h2>
-        <p data-r>Pierwsza strona dla firmy z regionu już działa – CANG z Kamiennej Góry. Pozostałe to przykładowe projekty, które pokazują mój styl.</p>
+        <p data-r>Strony dla firm z regionu już działają – CANG z Kamiennej Góry i barbershop Noble Cut z Pisarzowic. Pozostałe to przykładowe projekty, które pokazują mój styl.</p>
       </div>
 
       <div class="works">
@@ -883,6 +975,35 @@
           <div class="w-meta"><h3 class="w-brand"><span class="w-logo"><img src="cang-znak.svg" alt="" width="241" height="114" loading="lazy"></span>CANG – ziemia, kruszywa i usługi budowlane</h3><span>Realizacja · Kamienna Góra</span></div>
           <p>Ceny na wierzchu i zamówienie przez WhatsApp: klient zaznacza, czego potrzebuje, a gotowa wiadomość sama się pisze.</p>
           <a class="w-live" href="https://cang.pl" target="_blank" rel="noopener">Zobacz na żywo: cang.pl<svg class="ic arr"><use href="#i-arr"/></svg></a>
+        </article>
+        <article class="work" data-r>
+          <div class="stage">
+            <a class="phone" href="https://noblecut.pl" target="_blank" rel="noopener" aria-label="Strona Noble Cut Barbershop z Pisarzowic (otwiera noblecut.pl)">
+              <div class="screen">
+                <div class="site s-nc" aria-hidden="true">
+                  <div class="m-nav"><b><img src="noblecut-logo.svg" alt="" width="1230" height="500" loading="lazy"></b><span class="n-call">Zapisz się</span></div>
+                  <div class="n-hero">
+                    <p class="n-h">Świeże cięcie.<br><i>Uczciwa cena.</i></p>
+                    <p class="n-lead">Strzyżenie męskie od <b>35 zł</b>, modelowanie w cenie.</p>
+                    <div class="n-shield"><img src="noblecut-fryzura.jpg" alt="" width="480" height="560" loading="lazy" decoding="async"></div>
+                  </div>
+                  <div class="n-strip">Fade ★ Klasyczne ★ Cieniowanie ★ Heiki Heiki</div>
+                  <div class="m-sec">
+                    <p class="m-t">Cennik</p>
+                    <div class="n-price"><span>Strzyżenie klasyczne</span><b>35 zł</b></div>
+                    <div class="n-price"><span>Fade / cieniowanie</span><b>45 zł</b></div>
+                    <p class="m-t" style="margin-top:14px">Pracownia</p>
+                  </div>
+                  <div class="n-grid"><img src="noblecut-maja.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"><img src="noblecut-blond.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"><img src="noblecut-lustro.jpg" alt="" width="300" height="300" loading="lazy" decoding="async"></div>
+                  <div style="height:64px"></div>
+                </div>
+                <div class="m-sticky n-sticky" aria-hidden="true"><span>Zapisz się na WhatsApp</span></div>
+              </div>
+            </a>
+          </div>
+          <div class="w-meta"><h3 class="w-brand"><span class="w-logo w-logo-nc"><img src="noblecut-znak.svg" alt="" width="292" height="444" loading="lazy"></span>Noble Cut Barbershop</h3><span>Realizacja · Pisarzowice</span></div>
+          <p>Własna sesja zdjęciowa, cennik na wierzchu i zapisy przez WhatsApp: klient wybiera strzyżenie i dzień, a wiadomość pisze się sama.</p>
+          <a class="w-live" href="https://noblecut.pl" target="_blank" rel="noopener">Zobacz na żywo: noblecut.pl<svg class="ic arr"><use href="#i-arr"/></svg></a>
         </article>
         <article class="work" data-r>
           <div class="stage">
@@ -944,6 +1065,34 @@
       <div class="wrap ph-nav">
         <button class="icbtn" type="button" data-ph="-1" aria-label="Poprzednie zdjęcia"><svg class="ic"><use href="#i-left"/></svg></button>
         <button class="icbtn" type="button" data-ph="1" aria-label="Następne zdjęcia"><svg class="ic"><use href="#i-right"/></svg></button>
+      </div>
+    </div>
+  
+    <div class="wrap">
+      <div class="photos-head" id="sesja-noble-cut">
+        <h3 data-r>Sesja dla Noble Cut Barbershop</h3>
+        <p data-r>Cała sesja z wizyty w pracowni barberskiej w Pisarzowicach, w pełnej jakości. Dotknij zdjęcia, żeby je powiększyć.</p>
+      </div>
+    </div>
+    <div class="ph-wrap" data-r>
+      <div class="photos" id="photos-nc">
+        <button type="button" style="--a:1400/933" data-full="hd-nc-01.jpg" data-fw="2576" data-w="1400" data-cap="Strzyżenie nożyczkami, widok w lustrze · Noble Cut Barbershop"><img src="nc-01.jpg" alt="Strzyżenie nożyczkami, widok w lustrze – sesja dla Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:1400/933" data-full="hd-nc-02.jpg" data-fw="2576" data-w="1400" data-cap="Maja przy pracy maszynką · Noble Cut Barbershop"><img src="nc-02.jpg" alt="Maja przy pracy maszynką – sesja dla Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:1400/933" data-full="hd-nc-03.jpg" data-fw="2576" data-w="1400" data-cap="Odbicie w lustrze w złotych ramkach · Noble Cut Barbershop"><img src="nc-03.jpg" alt="Odbicie w lustrze w złotych ramkach – sesja dla Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:1400/933" data-full="hd-nc-04.jpg" data-fw="2576" data-w="1400" data-cap="Maja przygotowuje włosy do cięcia · Noble Cut Barbershop"><img src="nc-04.jpg" alt="Maja przygotowuje włosy do cięcia – sesja dla Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:1400/933" data-full="hd-nc-05.jpg" data-fw="2576" data-w="1400" data-cap="Cięcie nożyczkami i grzebieniem · Noble Cut Barbershop"><img src="nc-05.jpg" alt="Cięcie nożyczkami i grzebieniem – sesja dla Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:933/1400" data-full="hd-nc-06.jpg" data-fw="1717" data-w="933" data-cap="Cieniowanie karku maszynką · Noble Cut Barbershop"><img src="nc-06.jpg" alt="Cieniowanie karku maszynką – sesja dla Noble Cut Barbershop" width="933" height="1400" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:1400/933" data-full="hd-nc-07.jpg" data-fw="2576" data-w="1400" data-cap="Maszynka VGR przy pracy · Noble Cut Barbershop"><img src="nc-07.jpg" alt="Maszynka VGR przy pracy – sesja dla Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:1400/933" data-full="hd-nc-08.jpg" data-fw="2576" data-w="1400" data-cap="Stanowisko w pracowni · Noble Cut Barbershop"><img src="nc-08.jpg" alt="Stanowisko w pracowni – sesja dla Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:1400/933" data-full="hd-nc-09.jpg" data-fw="2576" data-w="1400" data-cap="Pracownia: lustro, regał i klient na fotelu · Noble Cut Barbershop"><img src="nc-09.jpg" alt="Pracownia: lustro, regał i klient na fotelu – sesja dla Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:933/1400" data-full="hd-nc-10.jpg" data-fw="1717" data-w="933" data-cap="Maja przy pracy, widok zza pleców · Noble Cut Barbershop"><img src="nc-10.jpg" alt="Maja przy pracy, widok zza pleców – sesja dla Noble Cut Barbershop" width="933" height="1400" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:933/1400" data-full="hd-nc-11.jpg" data-fw="1717" data-w="933" data-cap="Wyrównywanie karku maszynką · Noble Cut Barbershop"><img src="nc-11.jpg" alt="Wyrównywanie karku maszynką – sesja dla Noble Cut Barbershop" width="933" height="1400" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:933/1400" data-full="hd-nc-12.jpg" data-fw="1717" data-w="933" data-cap="Gotowa fryzura · Noble Cut Barbershop"><img src="nc-12.jpg" alt="Gotowa fryzura – sesja dla Noble Cut Barbershop" width="933" height="1400" loading="lazy" decoding="async"></button>
+        <button type="button" style="--a:933/1400" data-full="hd-nc-13.jpg" data-fw="1717" data-w="933" data-cap="Gotowa fryzura z profilu · Noble Cut Barbershop"><img src="nc-13.jpg" alt="Gotowa fryzura z profilu – sesja dla Noble Cut Barbershop" width="933" height="1400" loading="lazy" decoding="async"></button>
+      </div>
+      <div class="wrap ph-nav">
+        <button class="icbtn" type="button" data-ph="-1" aria-label="Poprzednie zdjęcia z sesji"><svg class="ic"><use href="#i-left"/></svg></button>
+        <button class="icbtn" type="button" data-ph="1" aria-label="Następne zdjęcia z sesji"><svg class="ic"><use href="#i-right"/></svg></button>
       </div>
     </div>
   </section>
