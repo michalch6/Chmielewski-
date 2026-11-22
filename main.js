@@ -96,6 +96,23 @@
     rot.textContent = '';
     rot.appendChild(cur);
 
+    // Cała strona dopasowuje się do wyboru: inne sekcje, menu, linki i kolejność
+    const works = document.getElementById('realizacje');
+    const gallery = document.getElementById('zdjecia');
+    const contactSec = document.getElementById('kontakt');
+    const swapLinks = (m) => document.querySelectorAll('[data-photo-href]').forEach((a) => {
+      if (!a.dataset.webHref) a.dataset.webHref = a.getAttribute('href');
+      a.setAttribute('href', m === 'photo' ? a.dataset.photoHref : a.dataset.webHref);
+    });
+    const applyPage = (m) => {
+      swapLinks(m);
+      // W trybie zdjęć strony WWW pokazuję pod koniec, przed kontaktem
+      if (works && gallery && contactSec) {
+        if (m === 'photo') contactSec.parentNode.insertBefore(works, contactSec);
+        else gallery.parentNode.insertBefore(works, gallery);
+      }
+      if (window.ScrollTrigger) requestAnimationFrame(() => ScrollTrigger.refresh());
+    };
     let mode = 'web';
     let idx = 0;
     let turns = 0;
@@ -175,7 +192,9 @@
       mode = m;
       idx = 0;
       turns = 0;
-      hero.dataset.mode = m;
+      document.documentElement.dataset.mode = m;
+      try { sessionStorage.setItem('tryb', m); } catch (e) { /* bez zapamiętania */ }
+      applyPage(m);
       modeBtns.forEach((b) => b.setAttribute('aria-checked', String(b.dataset.mode === m)));
       placeThumb();
       swapLine(lnA, TEXT[m].a);
@@ -200,6 +219,16 @@
     };
 
     modeBtns.forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+    if (document.documentElement.dataset.mode === 'photo') {
+      mode = 'photo';
+      modeBtns.forEach((b) => b.setAttribute('aria-checked', String(b.dataset.mode === 'photo')));
+      lnA.innerHTML = TEXT.photo.a; lnB.innerHTML = TEXT.photo.b; capEl.innerHTML = TEXT.photo.cap;
+      rot.textContent = ''; cur = build(WORDS.photo[0]); rot.appendChild(cur);
+      if (srWord) srWord.textContent = WORDS.photo[0];
+      placeThumb();
+      applyPage('photo');
+      setTimeout(() => shoot(WORDS.photo[0]), motion ? 1200 : 0);
+    }
     // Strzałki na klawiaturze w grupie przycisków
     hero.querySelector('.mode-sw').addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -400,6 +429,13 @@
       const b = form.querySelector('input[name="b"]:checked');
       const firm = form.querySelector('#q-firm').value.trim();
       let msg = 'Dzień dobry! Piszę ze strony chmielewskifoto.pl.';
+      if (document.documentElement.dataset.mode === 'photo') {
+        const ev = form.querySelector('input[name="e"]:checked');
+        const when = form.querySelector('#q-when').value.trim();
+        msg += ' Potrzebuję zdjęć' + (ev ? ' na ' + ev.value : '') + '.' + (when ? ' Termin i miejsce: ' + when + '.' : '') + ' Proszę o wycenę.';
+        window.open('https://wa.me/48736842214?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+        return;
+      }
       if (b) msg += ' Prowadzę ' + b.value + (firm ? ' (' + firm + ')' : '') + '.';
       else if (firm) msg += ' Moja firma: ' + firm + '.';
       msg += ' Chcę umówić bezpłatne spotkanie w sprawie strony internetowej.';

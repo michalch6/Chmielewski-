@@ -7,6 +7,7 @@
 <meta name="description" content="Strona internetowa dla Twojej firmy w ok. 3 dni. W cenie domena na rok, darmowy hosting i sesja zdjęciowa. Bezpłatne spotkanie i wycena. Także rolki i zdjęcia ze ślubów, osiemnastek i koncertów. Lubawka, Kamienna Góra, Wałbrzych, Wrocław.">
 <meta name="google-site-verification" content="HD8w1NYQOtW6Czh-hsRCA474n9F0E3SdZ-nRMRrCEA0">
 <meta name="theme-color" content="#10130F">
+<script>(function(d){var h=d.documentElement;try{var q=location.search+location.hash;var m=/zdjecia|foto/i.test(q)?'photo':/strony/i.test(q)?'web':sessionStorage.getItem('tryb');if(m==='photo')h.setAttribute('data-mode','photo')}catch(e){}})(document);</script>
 <script>(function(d){var h=d.documentElement;h.className=h.className.replace('no-js','js');try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){h.classList.add('intro');window.__introT=setTimeout(function(){h.classList.remove('intro')},2500)}}catch(e){}})(document);</script>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pl_PL">
@@ -165,9 +166,22 @@
   @media (hover:hover) and (pointer:fine){.mode-sw button[aria-checked="false"]:hover{color:var(--lime)}}
   @media (max-width:389px){.mode-sw button{padding:0 13px;font-size:14.5px;gap:6px}}
   html:not(.js) .mode{display:none}
-  .hero:not([data-mode="photo"]) [data-for="photo"],.hero[data-mode="photo"] [data-for="web"]{display:none!important}
-  .hero[data-mode="photo"] .cam-stage{visibility:visible}
-  .hero[data-mode="photo"] .hero-visual .phone,.hero[data-mode="photo"] .badge{visibility:hidden}
+  html:not([data-mode="photo"]) [data-for="photo"],html[data-mode="photo"] [data-for="web"]{display:none!important}
+  html[data-mode="photo"] .cam-stage{visibility:visible}
+  html[data-mode="photo"] .hero-visual .phone,html[data-mode="photo"] .badge{visibility:hidden}
+  /* Oferta zdjęć */
+  .xtxt .tlink{display:inline-flex;margin-top:12px}
+  .x-ask{background:var(--night);border-color:var(--night);color:var(--on-night)}
+  .x-ask .xtxt p{color:var(--on-night-2)}
+  .x-ask .tlink{color:var(--lime)}
+  .x-ico{display:grid;place-items:center;background:var(--night-3);color:var(--lime)}
+  .x-ico .ic{width:42px;height:42px;stroke-width:1.4}
+  .fsteps{display:grid;gap:10px;margin:40px 0 0;padding:0;list-style:none;counter-reset:none}
+  .fsteps li{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r-md);background:var(--paper-2);font-size:16px;line-height:1.35}
+  .fsteps b{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;background:var(--night);color:var(--lime);font:400 14px/1 var(--mono)}
+  @media (min-width:900px){.fsteps{grid-template-columns:repeat(3,1fr);gap:16px}}
+  .fnote{margin-top:18px;color:var(--stone);max-width:60ch}
+  .photos-head.ph-first{margin-top:0}
   .hero-visual{cursor:pointer}
 
   /* Aparat ze zdjęciami (tryb „fotografia” w nagłówku) */
@@ -634,12 +648,17 @@
       <span><b>Chmielewski</b><small>Strony · Foto · Rolki</small></span>
     </a>
     <nav class="nav" aria-label="Menu">
-      <a class="nl only-lg" href="#oferta">Co robię</a>
-      <a class="nl only-lg" href="#cena">Cena</a>
-      <a class="nl only-lg" href="#jak">Jak to działa</a>
-      <a class="nl only-lg" href="#realizacje">Realizacje</a>
-      <a class="nl only-lg" href="#faq">FAQ</a>
-      <a class="btn btn-lime only-lg" href="#kontakt">Bezpłatne spotkanie</a>
+      <a class="nl only-lg" data-for="web" href="#oferta">Co robię</a>
+      <a class="nl only-lg" data-for="web" href="#cena">Cena</a>
+      <a class="nl only-lg" data-for="web" href="#jak">Jak to działa</a>
+      <a class="nl only-lg" data-for="web" href="#realizacje">Realizacje</a>
+      <a class="nl only-lg" data-for="web" href="#faq">FAQ</a>
+      <a class="nl only-lg" data-for="photo" href="#foto-oferta">Co fotografuję</a>
+      <a class="nl only-lg" data-for="photo" href="#zdjecia">Galeria</a>
+      <a class="nl only-lg" data-for="photo" href="#o-mnie">O mnie</a>
+      <a class="nl only-lg" data-for="photo" href="#realizacje">Strony</a>
+      <a class="btn btn-lime only-lg" data-for="web" href="#kontakt">Bezpłatne spotkanie</a>
+      <a class="btn btn-lime only-lg" data-for="photo" href="#kontakt">Zapytaj o termin</a>
       <a class="btn btn-lime only-sm" href="tel:+48736842214"><svg class="ic"><use href="#i-phone"/></svg>Zadzwoń</a>
     </nav>
   </div>
@@ -754,8 +773,59 @@
     </div>
   </section>
 
+  <!-- PHOTO OFFER (tryb „Zdjęcia”) -->
+  <section class="sec paper sheet" id="foto-oferta" data-for="photo" aria-labelledby="foto-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label" data-r>Fotografia</p>
+        <h2 id="foto-h" data-r>Zdjęcia z ważnych dni <em>i&nbsp;miejsc</em></h2>
+        <p data-r>Fotografuję aparatem Lumix S5II. Przyjeżdżam na miejsce, fotografuję całe wydarzenie i wybieram najlepsze ujęcia.</p>
+      </div>
+      <div class="extra-grid">
+        <article class="xcard" data-r>
+          <div class="xmedia"><img src="ig-04.jpg" alt="Toast z przyjaciółkami na 18-stce Igi" width="1400" height="933" loading="lazy" decoding="async"></div>
+          <div class="xtxt">
+            <h4>Osiemnastki</h4>
+            <p>Toast, tort, przyjaciele i rodzina. Reportaż z całej imprezy, jak 18-stka Igi w Karczmie Kamiennej.</p>
+            <a class="tlink" href="#osiemnastka-igi">Zobacz zdjęcia<svg class="ic arr"><use href="#i-arr"/></svg></a>
+          </div>
+        </article>
+        <article class="xcard" data-r>
+          <div class="xmedia"><img src="nc-02.jpg" alt="Sesja w pracowni Noble Cut Barbershop" width="1400" height="933" loading="lazy" decoding="async"></div>
+          <div class="xtxt">
+            <h4>Firmy i salony</h4>
+            <p>Wnętrza, ludzie przy pracy i gotowe efekty. Zdjęcia na stronę, Instagram i do Map Google.</p>
+            <a class="tlink" href="#sesja-noble-cut">Zobacz zdjęcia<svg class="ic arr"><use href="#i-arr"/></svg></a>
+          </div>
+        </article>
+        <article class="xcard" data-r>
+          <div class="xmedia"><img src="festiwal-dym.jpg" alt="Koncert na festiwalu Wonderland – Asia w Jeleniej Górze" width="1400" height="933" loading="lazy" decoding="async"></div>
+          <div class="xtxt">
+            <h4>Koncerty i eventy</h4>
+            <p>Scena, światła i publiczność. Fotografowałem m.in. festiwal Wonderland – Asia w Jeleniej Górze.</p>
+            <a class="tlink" href="#zdjecia">Zobacz zdjęcia<svg class="ic arr"><use href="#i-arr"/></svg></a>
+          </div>
+        </article>
+        <article class="xcard x-ask" data-r>
+          <div class="xmedia x-ico" aria-hidden="true"><svg class="ic"><use href="#i-cam"/></svg></div>
+          <div class="xtxt">
+            <h4>Śluby i studniówki</h4>
+            <p>Ślub, wesele, studniówka albo inna ważna uroczystość. Napisz termin, a powiem, czy jestem wolny.</p>
+            <a class="tlink" href="#kontakt">Zapytaj o termin<svg class="ic arr"><use href="#i-arr"/></svg></a>
+          </div>
+        </article>
+      </div>
+      <ol class="fsteps" data-r>
+        <li><b>1</b><span>Piszesz termin, miejsce i co się będzie działo</span></li>
+        <li><b>2</b><span>Przyjeżdżam i fotografuję na miejscu</span></li>
+        <li><b>3</b><span>Dostajesz wybrane i obrobione zdjęcia</span></li>
+      </ol>
+      <p class="fnote" data-r>Cenę podaję po rozmowie, bo zależy od rodzaju i długości wydarzenia. Wycena jest bezpłatna.</p>
+    </div>
+  </section>
+
   <!-- WHY IT MATTERS -->
-  <section class="sec paper sheet" id="tresc" aria-labelledby="st-label">
+  <section class="sec paper sheet" id="tresc" data-for="web" aria-labelledby="st-label">
     <div class="wrap">
       <p class="label" id="st-label">Dlaczego to ważne</p>
       <p class="statement" data-words>Zanim klient przyjdzie do Twojej firmy, najpierw sprawdza ją w&nbsp;telefonie. Jeśli nie znajdzie godzin, cen i&nbsp;numeru, <em>wybierze tych, którzy mają stronę.</em></p>
@@ -767,7 +837,7 @@
   </section>
 
   <!-- WHAT I DO -->
-  <section class="sec paper" id="oferta" aria-labelledby="oferta-h">
+  <section class="sec paper" id="oferta" data-for="web" aria-labelledby="oferta-h">
     <div class="wrap">
       <div class="sec-head">
         <p class="label" data-r>Co robię</p>
@@ -840,7 +910,7 @@
   </section>
 
   <!-- BENEFITS -->
-  <section class="sec mist sheet" id="korzysci" aria-labelledby="korzysci-h">
+  <section class="sec mist sheet" id="korzysci" data-for="web" aria-labelledby="korzysci-h">
     <div class="wrap">
       <div class="sec-head">
         <p class="label" data-r>Co zyskujesz</p>
@@ -859,7 +929,7 @@
   </section>
 
   <!-- PRICE -->
-  <section class="sec dark grain sheet" id="cena" aria-labelledby="cena-h">
+  <section class="sec dark grain sheet" id="cena" data-for="web" aria-labelledby="cena-h">
     <div class="wrap">
       <div class="sec-head">
         <p class="label" data-r>Oferta i cena</p>
@@ -917,7 +987,7 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="sec paper sheet" id="jak" aria-labelledby="jak-h">
+  <section class="sec paper sheet" id="jak" data-for="web" aria-labelledby="jak-h">
     <div class="wrap how">
       <div class="sec-head">
         <p class="label" data-r>Jak to działa</p>
@@ -939,7 +1009,7 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="label" data-r>Realizacje</p>
-        <h2 id="realizacje-h" data-r>Tak może wyglądać <em>Twoja strona</em></h2>
+        <h2 id="realizacje-h" data-r><span data-for="web">Tak może wyglądać <em>Twoja strona</em></span><span data-for="photo">Zobacz też, jakie <em>robię strony</em></span></h2>
         <p data-r>Strony dla firm z regionu już działają – CANG z Kamiennej Góry i barbershop Noble Cut z Pisarzowic. Pozostałe to przykładowe projekty, które pokazują mój styl.</p>
       </div>
 
@@ -1046,9 +1116,18 @@
         </article>
       </div>
       <p class="swipe" aria-hidden="true">Przesuń w bok →</p>
+    </div>
+  </section>
 
-      <div class="photos-head">
-        <h3 data-r>Zdjęcia z mojego aparatu</h3>
+  <!-- PHOTO GALLERIES -->
+  <section class="sec paper" id="zdjecia" aria-labelledby="zdjecia-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label" data-r>Fotografia</p>
+        <h2 id="zdjecia-h" data-r><span data-for="web">Zobacz też <em>moje zdjęcia</em></span><span data-for="photo">Moje <em>zdjęcia</em></span></h2>
+      </div>
+      <div class="photos-head ph-first">
+        <h3 data-r>Koncerty, podróże i miasta</h3>
         <p data-r>Koncerty, przyroda i miasta. Te same umiejętności wykorzystuję przy zdjęciach dla firm. Dotknij zdjęcia, żeby je powiększyć.</p>
       </div>
     </div>
@@ -1072,7 +1151,7 @@
     <div class="wrap">
       <div class="photos-head" id="sesja-noble-cut">
         <h3 data-r>Sesja dla Noble Cut Barbershop</h3>
-        <p data-r>Cała sesja z wizyty w pracowni barberskiej w Pisarzowicach, w pełnej jakości. Dotknij zdjęcia, żeby je powiększyć.</p>
+        <p data-r>Cała sesja z wizyty w pracowni barberskiej w Pisarzowicach. Dotknij zdjęcia, żeby je powiększyć.</p>
       </div>
     </div>
     <div class="ph-wrap" data-r>
@@ -1100,7 +1179,7 @@
       <div class="photos-head" id="osiemnastka-igi">
         <h3 data-r>18-stka Igi</h3>
         <p class="ph-loc" data-r>Karczma Kamienna 1780 · Czarny Bór</p>
-        <p data-r>Toast, tort, przyjaciółki i dużo śmiechu. Zdjęcia w pełnej jakości, dotknij, żeby powiększyć.</p>
+        <p data-r>Toast, tort, przyjaciółki i dużo śmiechu. Dotknij zdjęcia, żeby je powiększyć.</p>
       </div>
     </div>
     <div class="ph-wrap" data-r>
@@ -1148,7 +1227,7 @@
   </section>
 
   <!-- FAQ -->
-  <section class="sec mist" id="faq" aria-labelledby="faq-h">
+  <section class="sec mist" id="faq" data-for="web" aria-labelledby="faq-h">
     <div class="wrap faq-grid">
       <div class="sec-head">
         <p class="label" data-r>FAQ</p>
@@ -1177,14 +1256,15 @@
   <section class="sec dark grain sheet contact" id="kontakt" aria-labelledby="kontakt-h">
     <div class="wrap">
       <p class="label" data-r>Kontakt</p>
-      <h2 id="kontakt-h" data-r style="margin-top:20px">Umówmy <em>bezpłatne spotkanie</em></h2>
-      <p class="lead" data-r>Zadzwoń, napisz na WhatsAppie albo wyślij maila. Odpisuję zwykle w ciągu jednego dnia. Spotkanie i wycena nic nie kosztują i do niczego nie zobowiązują.</p>
+      <h2 id="kontakt-h" data-r style="margin-top:20px"><span data-for="web">Umówmy <em>bezpłatne spotkanie</em></span><span data-for="photo">Zapytaj <em>o termin</em></span></h2>
+      <p class="lead" data-r data-for="web">Zadzwoń, napisz na WhatsAppie albo wyślij maila. Odpisuję zwykle w ciągu jednego dnia. Spotkanie i wycena nic nie kosztują i do niczego nie zobowiązują.</p>
+      <p class="lead" data-r data-for="photo">Zadzwoń, napisz na WhatsAppie albo wyślij maila z datą i miejscem. Odpisuję zwykle w ciągu jednego dnia. Wycena nic nie kosztuje.</p>
 
       <div class="c-grid">
         <div class="c-btns">
           <a class="cbtn" href="tel:+48736842214" data-r><i><svg class="ic"><use href="#i-phone"/></svg></i><span><small>Zadzwoń</small><b>+48 736 842 214</b></span><svg class="ic go"><use href="#i-arr"/></svg></a>
-          <a class="cbtn" href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20strony%20internetowej%20dla%20mojej%20firmy." target="_blank" rel="noopener" data-r><i><svg class="ic"><use href="#i-wa"/></svg></i><span><small>WhatsApp</small><b>Napisz wiadomość</b></span><svg class="ic go"><use href="#i-arr"/></svg></a>
-          <a class="cbtn" href="mailto:kontakt@chmielewskifoto.pl?subject=Strona%20internetowa%20dla%20mojej%20firmy" data-r><i><svg class="ic"><use href="#i-mail"/></svg></i><span><small>E-mail</small><b>kontakt@chmielewskifoto.pl</b></span><svg class="ic go"><use href="#i-arr"/></svg></a>
+          <a class="cbtn" data-photo-href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20sesji%20zdj%C4%99ciowej." href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20strony%20internetowej%20dla%20mojej%20firmy." target="_blank" rel="noopener" data-r><i><svg class="ic"><use href="#i-wa"/></svg></i><span><small>WhatsApp</small><b>Napisz wiadomość</b></span><svg class="ic go"><use href="#i-arr"/></svg></a>
+          <a class="cbtn" data-photo-href="mailto:kontakt@chmielewskifoto.pl?subject=Sesja%20zdj%C4%99ciowa" href="mailto:kontakt@chmielewskifoto.pl?subject=Strona%20internetowa%20dla%20mojej%20firmy" data-r><i><svg class="ic"><use href="#i-mail"/></svg></i><span><small>E-mail</small><b>kontakt@chmielewskifoto.pl</b></span><svg class="ic go"><use href="#i-arr"/></svg></a>
           <div class="c-extra" data-r>
             <button class="copy" type="button" data-copy="+48 736 842 214" data-label="Kopiuj numer">Kopiuj numer</button>
             <button class="copy" type="button" data-copy="kontakt@chmielewskifoto.pl" data-label="Kopiuj e-mail">Kopiuj e-mail</button>
@@ -1194,8 +1274,17 @@
 
         <form class="composer" id="quick" action="https://wa.me/48736842214" method="get" target="_blank" data-r>
           <h3>Szybka wiadomość</h3>
-          <p>Zaznacz, czym się zajmujesz, a ja przygotuję wiadomość na WhatsApp. Wystarczy ją wysłać.</p>
-          <fieldset class="opts">
+          <p data-for="web">Zaznacz, czym się zajmujesz, a ja przygotuję wiadomość na WhatsApp. Wystarczy ją wysłać.</p>
+          <p data-for="photo">Zaznacz, na jaką okazję potrzebujesz zdjęć, a ja przygotuję wiadomość na WhatsApp. Wystarczy ją wysłać.</p>
+          <fieldset class="opts" data-for="photo">
+            <legend>Potrzebuję zdjęć na:</legend>
+            <label><input type="radio" name="e" value="ślub"><span>Ślub</span></label>
+            <label><input type="radio" name="e" value="osiemnastkę"><span>Osiemnastkę</span></label>
+            <label><input type="radio" name="e" value="studniówkę"><span>Studniówkę</span></label>
+            <label><input type="radio" name="e" value="event albo koncert"><span>Event</span></label>
+            <label><input type="radio" name="e" value="sesję dla firmy"><span>Dla firmy</span></label>
+          </fieldset>
+          <fieldset class="opts" data-for="web">
             <legend>Moja firma to:</legend>
             <label><input type="radio" name="b" value="restaurację"><span>Restauracja</span></label>
             <label><input type="radio" name="b" value="kawiarnię"><span>Kawiarnia</span></label>
@@ -1204,9 +1293,13 @@
             <label><input type="radio" name="b" value="sklep"><span>Sklep</span></label>
             <label><input type="radio" name="b" value="firmę usługową"><span>Usługi</span></label>
           </fieldset>
-          <div class="fld">
+          <div class="fld" data-for="web">
             <label for="q-firm">Nazwa firmy i miejscowość <span style="opacity:.7">(nieobowiązkowo)</span></label>
             <input id="q-firm" type="text" autocomplete="organization" enterkeyhint="send" placeholder="np. Kawiarnia Ziarno, Kamienna Góra">
+          </div>
+          <div class="fld" data-for="photo">
+            <label for="q-when">Data i miejsce <span style="opacity:.7">(nieobowiązkowo)</span></label>
+            <input id="q-when" type="text" enterkeyhint="send" placeholder="np. 14 czerwca, Kamienna Góra">
           </div>
           <button class="btn btn-lime" type="submit"><svg class="ic"><use href="#i-wa"/></svg>Wyślij na WhatsApp</button>
           <p class="fine">Dane trafią do mnie dopiero wtedy, gdy wyślesz wiadomość. <button type="button" data-pp>Polityka prywatności</button></p>
@@ -1231,8 +1324,8 @@
 
 <nav class="bar" aria-label="Szybki kontakt">
   <a href="tel:+48736842214"><svg class="ic"><use href="#i-phone"/></svg>Zadzwoń</a>
-  <a class="wa" href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20strony%20internetowej%20dla%20mojej%20firmy." target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
-  <a href="mailto:kontakt@chmielewskifoto.pl?subject=Strona%20internetowa%20dla%20mojej%20firmy"><svg class="ic"><use href="#i-mail"/></svg>E-mail</a>
+  <a class="wa" data-photo-href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20sesji%20zdj%C4%99ciowej." href="https://wa.me/48736842214?text=Dzie%C5%84%20dobry%21%20Pisz%C4%99%20ze%20strony%20chmielewskifoto.pl%20w%20sprawie%20strony%20internetowej%20dla%20mojej%20firmy." target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg>WhatsApp</a>
+  <a data-photo-href="mailto:kontakt@chmielewskifoto.pl?subject=Sesja%20zdj%C4%99ciowa" href="mailto:kontakt@chmielewskifoto.pl?subject=Strona%20internetowa%20dla%20mojej%20firmy"><svg class="ic"><use href="#i-mail"/></svg>E-mail</a>
 </nav>
 
 <dialog class="lb" id="lb" aria-label="Powiększone zdjęcie">
