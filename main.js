@@ -61,8 +61,8 @@
     /* Zestawy zdjęć do aparatu – wszystkie z mojego aparatu */
     const SETS = {
       'na ślub': ['madera-wschod-para', 'madera-kwiat', 'praga-most'],
-      'na 18-stkę': ['festiwal-turkus', 'festiwal-pomarancz', 'festiwal-dym'],
-      'na studniówkę': ['festiwal-niebieski', 'festiwal-pion', 'chorwacja-latarnie'],
+      'na 18-stkę': ['ig-01', 'ig-02', 'ig-03'],
+      'na studniówkę': ['festiwal-turkus', 'festiwal-pomarancz', 'festiwal-niebieski'],
       'dla salonu': ['nc-13', 'nc-02', 'nc-08'],
       'dla firmy': ['nc-09', 'praga-auto', 'nc-12']
     };
